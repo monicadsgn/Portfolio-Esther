@@ -1,0 +1,127 @@
+---
+import Foto from './Foto.astro';
+import type { Carrossel } from '../data/conteudo';
+
+interface Props {
+  carrossel: Carrossel;
+  dono: string;
+}
+
+const { carrossel, dono } = Astro.props;
+const total = carrossel.cards.length;
+const rotulo = (i: number) => (i === 0 ? 'Capa' : `Card ${i + 1}`);
+---
+
+<div class="carrossel" data-carrossel>
+  <div class="carrossel-palco">
+    <div
+      class="carrossel-trilho"
+      tabindex="0"
+      role="region"
+      aria-roledescription="carrossel"
+      aria-label={`${carrossel.titulo} da ${dono}. Use as setas do teclado para passar os cards.`}
+    >
+      {
+        carrossel.cards.map((card, i) => (
+          <figure class="carrossel-card" aria-roledescription="card" aria-label={`${i + 1} de ${total}`}>
+            <Foto
+              nome={card.imagem}
+              alt={`${rotulo(i)} do carrossel publicado da ${dono}. Texto: ${card.texto}`}
+              widths={[360, 540, 720]}
+              sizes="(min-width: 960px) 400px, 82vw"
+            />
+          </figure>
+        ))
+      }
+    </div>
+    <div class="carrossel-controles">
+      <button type="button" class="carrossel-seta" data-anterior aria-label="Card anterior">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+      </button>
+      <p class="carrossel-contador" aria-live="polite">
+        <span data-atual>1</span> de {total}
+      </p>
+      <button type="button" class="carrossel-seta" data-proximo aria-label="Próximo card">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="carrossel-lado">
+    <p class="carrossel-titulo">{carrossel.titulo}</p>
+    <p class="carrossel-descricao">{carrossel.descricao}</p>
+    <ol class="carrossel-texto">
+      {
+        carrossel.cards.map((card, i) => (
+          <li aria-current={i === 0 ? 'true' : undefined}>
+            <button type="button" data-ir={i}>
+              <span class="carrossel-rotulo">{rotulo(i)}</span>
+              <span class="carrossel-frase">{card.texto}</span>
+            </button>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</div>
+
+<script>
+  const reduzido = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  document.querySelectorAll<HTMLElement>('[data-carrossel]').forEach((raiz) => {
+    const trilho = raiz.querySelector<HTMLElement>('.carrossel-trilho')!;
+    const cards = Array.from(raiz.querySelectorAll<HTMLElement>('.carrossel-card'));
+    const itens = Array.from(raiz.querySelectorAll<HTMLLIElement>('.carrossel-texto li'));
+    const atual = raiz.querySelector<HTMLElement>('[data-atual]')!;
+    const anterior = raiz.querySelector<HTMLButtonElement>('[data-anterior]')!;
+    const proximo = raiz.querySelector<HTMLButtonElement>('[data-proximo]')!;
+    let indice = 0;
+
+    const marcar = (i: number) => {
+      indice = i;
+      atual.textContent = String(i + 1);
+      anterior.disabled = i === 0;
+      proximo.disabled = i === cards.length - 1;
+      itens.forEach((li, j) => {
+        if (j === i) li.setAttribute('aria-current', 'true');
+        else li.removeAttribute('aria-current');
+      });
+    };
+
+    const ir = (i: number) => {
+      const alvo = Math.max(0, Math.min(cards.length - 1, i));
+      trilho.scrollTo({ left: cards[alvo].offsetLeft - trilho.offsetLeft, behavior: reduzido.matches ? 'auto' : 'smooth' });
+      marcar(alvo);
+    };
+
+    let espera: number | undefined;
+    trilho.addEventListener(
+      'scroll',
+      () => {
+        window.clearTimeout(espera);
+        espera = window.setTimeout(() => {
+          const i = Math.round(trilho.scrollLeft / trilho.clientWidth);
+          if (i !== indice) marcar(i);
+        }, 60);
+      },
+      { passive: true },
+    );
+
+    anterior.addEventListener('click', () => ir(indice - 1));
+    proximo.addEventListener('click', () => ir(indice + 1));
+    raiz.querySelectorAll<HTMLButtonElement>('[data-ir]').forEach((b) =>
+      b.addEventListener('click', () => ir(Number(b.dataset.ir))),
+    );
+    trilho.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        ir(indice + 1);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        ir(indice - 1);
+      }
+    });
+
+    marcar(0);
+  });
+</script>

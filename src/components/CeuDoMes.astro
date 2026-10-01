@@ -1,0 +1,76 @@
+---
+// Calendário de cobogó: 30 dias numa grade vazada. Alguns furos viram estrelas
+// e uma linha fina liga as estrelas, como constelação. É desenho, não dado:
+// os dias marcados não representam um calendário real.
+const colunas = 7;
+const linhas = 5;
+const inicio = 2; // o mês começa na terceira coluna
+const dias = 30;
+const estrelas = [7, 2, 11, 17, 26, 30, 22];
+const lado = 56;
+const meio = lado / 2;
+
+const celulas = Array.from({ length: colunas * linhas }, (_, i) => {
+  const dia = i - inicio + 1;
+  return {
+    x: (i % colunas) * lado,
+    y: Math.floor(i / colunas) * lado,
+    dia: dia >= 1 && dia <= dias ? dia : null,
+  };
+});
+
+const centro = (dia: number) => {
+  const i = dia + inicio - 1;
+  return { x: (i % colunas) * lado + meio, y: Math.floor(i / colunas) * lado + meio };
+};
+
+const pontos = estrelas.map(centro);
+const caminho = pontos.map((p, i) => `${i ? 'L' : 'M'}${p.x} ${p.y}`).join(' ');
+const estrela = (x: number, y: number, r: number) =>
+  `M${x} ${y - r} Q${x} ${y} ${x + r} ${y} Q${x} ${y} ${x} ${y + r} Q${x} ${y} ${x - r} ${y} Q${x} ${y} ${x} ${y - r}Z`;
+---
+
+<div class="ceu" data-ceu aria-hidden="true">
+  <svg viewBox={`0 0 ${colunas * lado} ${linhas * lado}`} focusable="false">
+    {
+      celulas.map((c) => (
+        <g class:list={['tijolo', { 'sem-dia': !c.dia }]}>
+          <rect x={c.x + 2} y={c.y + 2} width={lado - 4} height={lado - 4} rx="3" />
+          <circle cx={c.x + meio} cy={c.y + meio} r={meio - 9} class="furo" />
+          {c.dia && (
+            <text x={c.x + 7} y={c.y + 14}>
+              {c.dia}
+            </text>
+          )}
+        </g>
+      ))
+    }
+    <path class="constelacao" d={caminho} pathLength="1" />
+    {
+      pontos.map((p, i) => (
+        <path class="estrela" d={estrela(p.x, p.y, 11)} style={`--ordem:${i}`} />
+      ))
+    }
+  </svg>
+</div>
+
+<script>
+  const ceu = document.querySelector<HTMLElement>('[data-ceu]');
+  if (ceu) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+      ceu.classList.add('aceso');
+    } else {
+      ceu.classList.add('apagado');
+      const obs = new IntersectionObserver(
+        (entradas) => {
+          if (entradas.some((e) => e.isIntersecting)) {
+            ceu.classList.add('aceso');
+            obs.disconnect();
+          }
+        },
+        { threshold: 0.45 },
+      );
+      obs.observe(ceu);
+    }
+  }
+</script>

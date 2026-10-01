@@ -1,0 +1,420 @@
+---
+import '@fontsource-variable/bricolage-grotesque/standard.css';
+import '@fontsource-variable/hanken-grotesk/wght.css';
+import '../styles/global.css';
+import { getImage } from 'astro:assets';
+
+import Foto from '../components/Foto.astro';
+import MinhaParte from '../components/MinhaParte.astro';
+import Raciocinio from '../components/Raciocinio.astro';
+import Carrossel from '../components/Carrossel.astro';
+import CeuDoMes from '../components/CeuDoMes.astro';
+import { imagem } from '../lib/assets';
+import {
+  site,
+  contato,
+  capa,
+  ondeAtuei,
+  sobre,
+  comoTrabalho,
+  destaques,
+  revisao,
+  rita,
+  horn,
+  outrosProjetos,
+  rodape,
+} from '../data/conteudo';
+
+const whatsapp = `https://wa.me/${contato.whatsappNumero}?text=${encodeURIComponent(contato.whatsappMensagem)}`;
+const maiorReel = Math.max(...rita.reels.map((r) => r.visualizacoes));
+const numero = (n: number) => n.toLocaleString('pt-BR');
+const gruposReels = [...new Set(rita.reels.map((r) => r.grupo))];
+
+// Versão ampliada dos prints, para abrir ao tocar.
+const ampliar = async (nome: string) => {
+  const src = imagem(nome);
+  return src ? (await getImage({ src, width: Math.min(src.width, 900), format: 'webp' })).src : undefined;
+};
+const printsRita = await Promise.all(rita.prints.map(async (p) => ({ ...p, grande: await ampliar(p.imagem) })));
+
+const lista = (itens: string[]) =>
+  itens.length > 1 ? `${itens.slice(0, -1).join(', ')} e ${itens[itens.length - 1]}` : itens.join('');
+
+const iconeWhats =
+  'M12 2.2a9.7 9.7 0 0 0-8.3 14.8L2.4 21.8l4.9-1.3A9.7 9.7 0 1 0 12 2.2Zm0 17.7a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 19.9Zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8.9c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.2-.2-.5-.3Z';
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{site.titulo}</title>
+    <meta name="description" content={site.descricao} />
+    <meta name="theme-color" content="#0E2A1E" />
+    <link rel="canonical" href={site.url + '/'} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={site.titulo} />
+    <meta property="og:description" content={site.descricao} />
+    <meta property="og:url" content={site.url + '/'} />
+    <meta property="og:image" content={site.url + '/og.png'} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Esther Torres, social media e copywriting." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="menu">
+      <a class="menu-nome" href="#topo">{capa.nome}</a>
+      <nav aria-label="Seções">
+        <ul>
+          <li><a href="#destaques">Trabalhos</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="conteudo">
+      <!-- Capa -->
+      <section class="capa escuro" id="topo" aria-labelledby="nome">
+        <div class="capa-texto">
+          <h1 id="nome" class="capa-nome">
+            <span>Esther</span>
+            <span>Torres</span>
+          </h1>
+          <p class="capa-funcao">{capa.funcao}</p>
+          <p class="capa-linha">{capa.linhaFina}</p>
+          <blockquote class="capa-frase">
+            <p>{capa.frase}</p>
+          </blockquote>
+          <a class="botao botao-caja" href={whatsapp} target="_blank" rel="noopener" data-whats-principal>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d={iconeWhats} /></svg>
+            {capa.botao}
+          </a>
+        </div>
+        <div class="capa-retrato">
+          <svg class="capa-astros" viewBox="0 0 400 480" aria-hidden="true" focusable="false">
+            <circle class="sol-disco" cx="300" cy="110" r="86" />
+            <g class="sol-raios">
+              {
+                Array.from({ length: 24 }, (_, i) => {
+                  const a = (i / 24) * Math.PI * 2;
+                  return (
+                    <line
+                      x1={300 + Math.cos(a) * 100}
+                      y1={110 + Math.sin(a) * 100}
+                      x2={300 + Math.cos(a) * (i % 2 ? 114 : 128)}
+                      y2={110 + Math.sin(a) * (i % 2 ? 114 : 128)}
+                    />
+                  );
+                })
+              }
+            </g>
+            <path class="lua" d="M46 30a26 26 0 1 0 24 36 21 21 0 1 1-24-36Z" />
+            <circle class="ponto" cx="84" cy="22" r="2.2" />
+            <circle class="ponto" cx="24" cy="96" r="1.6" />
+          </svg>
+          <div class="arco">
+            <Foto
+              nome={capa.retrato}
+              alt={capa.retratoAlt}
+              widths={[320, 480, 640, 860]}
+              sizes="(min-width: 960px) 400px, 72vw"
+              eager
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Onde atuei -->
+      <section class="claro secao" id="onde" aria-labelledby="onde-titulo">
+        <div class="largura">
+          <h2 id="onde-titulo" class="titulo">{ondeAtuei.titulo}</h2>
+          <ul class="empresas">
+            {
+              ondeAtuei.destaques.map((e) => (
+                <li class="empresa">
+                  <p class="empresa-nome">{e.nome}</p>
+                  <div class="empresa-info">
+                    {e.descricao && <p>{e.descricao}</p>}
+                    <p>
+                      Clientes: <strong>{lista(e.clientes)}</strong>.
+                    </p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="empresas-outras">Também passei pela {lista(ondeAtuei.outras)}.</p>
+        </div>
+      </section>
+
+      <!-- Sobre -->
+      <section class="claro secao secao-sobre" id="sobre" aria-labelledby="sobre-titulo">
+        <div class="largura sobre">
+          <div class="sobre-texto">
+            <h2 id="sobre-titulo" class="titulo">{sobre.titulo}</h2>
+            {sobre.paragrafos.map((p, i) => <p class:list={{ 'sobre-abre': i === 1 }}>{p}</p>)}
+          </div>
+          <div class="sobre-lado">
+            <h3>Formação</h3>
+            <ul class="formacao">
+              {
+                sobre.formacao.map((f) => (
+                  <li>
+                    <strong>{f.curso}</strong>
+                    <span>
+                      {f.onde}, {f.quando}
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
+            <h3>Ferramentas</h3>
+            <p>{lista(sobre.ferramentas)}.</p>
+            <p>IA: {lista(sobre.ferramentasIA)}.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Como eu trabalho -->
+      <section class="escuro secao como" aria-labelledby="como-titulo">
+        <div class="largura como-grade">
+          <div>
+            <h2 id="como-titulo" class="como-rotulo">{comoTrabalho.titulo}</h2>
+            <p class="como-frase">{comoTrabalho.frase}</p>
+            <p class="como-complemento">{comoTrabalho.complemento}</p>
+            <p class="como-formato">{comoTrabalho.formato}</p>
+          </div>
+          <CeuDoMes />
+        </div>
+      </section>
+
+      <!-- Destaques -->
+      <section class="claro secao" id="destaques" aria-labelledby="destaques-titulo">
+        <div class="largura">
+          <h2 id="destaques-titulo" class="titulo">{destaques.titulo}</h2>
+          <p class="titulo-apoio">{destaques.intro}</p>
+
+          <!-- Revisão -->
+          <article class="caso" id={revisao.id} aria-labelledby="revisao-nome">
+            <header class="caso-topo">
+              <h3 id="revisao-nome" class="caso-nome">{revisao.nome}</h3>
+              <p class="caso-contexto">{revisao.contexto}</p>
+              <MinhaParte texto={revisao.minhaParte} />
+            </header>
+            <div class="revisao-grade">
+              <div class="revisao-numeros">
+                <div class="seguidores">
+                  <p class="numero">
+                    <strong>{revisao.seguidores.antes}</strong>
+                    <span>{revisao.seguidores.antesRotulo}</span>
+                  </p>
+                  <svg class="seguidores-linha" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true">
+                    <line x1="4" y1="10" x2="96" y2="10" vector-effect="non-scaling-stroke" />
+                  </svg>
+                  <p class="numero">
+                    <strong>{revisao.seguidores.depois}</strong>
+                    <span>{revisao.seguidores.depoisRotulo}</span>
+                  </p>
+                </div>
+                <div class="campanha">
+                  <p class="numero numero-grande">
+                    <strong>{revisao.campanha.numero}</strong>
+                    <span>{revisao.campanha.rotulo}</span>
+                  </p>
+                  <p class="campanha-explica">{revisao.campanha.explicacao}</p>
+                </div>
+                <p class="nota">{revisao.nota}</p>
+              </div>
+              <figure class="print print-revisao">
+                <Foto
+                  nome={revisao.print.imagem}
+                  alt={revisao.print.alt}
+                  widths={[380, 560, 738]}
+                  sizes="(min-width: 960px) 420px, 92vw"
+                />
+                <figcaption>{revisao.print.legenda}</figcaption>
+              </figure>
+            </div>
+            <Raciocinio paragrafos={revisao.raciocinio}>
+              {
+                revisao.copyLandingPage && (
+                  <div class="landing">
+                    <h4>{revisao.copyLandingPage.titulo}</h4>
+                    <p>{revisao.copyLandingPage.texto}</p>
+                    {revisao.copyLandingPage.link && (
+                      <a href={revisao.copyLandingPage.link} target="_blank" rel="noopener">
+                        Ver a página no ar
+                      </a>
+                    )}
+                  </div>
+                )
+              }
+            </Raciocinio>
+          </article>
+
+          <!-- Dra. Rita Leão -->
+          <article class="caso" id={rita.id} aria-labelledby="rita-nome">
+            <header class="caso-topo">
+              <h3 id="rita-nome" class="caso-nome">{rita.nome}</h3>
+              <p class="caso-contexto">Pela {rita.agencia}.</p>
+              <MinhaParte texto={rita.minhaParte} />
+            </header>
+
+            <figure class="reels">
+              <figcaption class="reels-resumo">{rita.resumo}</figcaption>
+              {
+                gruposReels.map((grupo) => (
+                  <div class:list={['reels-grupo', { 'reels-meus': grupo !== gruposReels[0] }]}>
+                    <p class="reels-grupo-nome">{grupo}</p>
+                    <ul>
+                      {rita.reels
+                        .filter((r) => r.grupo === grupo)
+                        .map((r) => (
+                          <li style={`--valor:${(r.visualizacoes / maiorReel).toFixed(4)}`}>
+                            <span class="reels-tema">{r.tema}</span>
+                            <span class="reels-barra" aria-hidden="true" />
+                            <span class="reels-valor">{numero(r.visualizacoes)} visualizações</span>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                ))
+              }
+              <p class="reels-escala" aria-hidden="true">
+                <span>0</span>
+                <span>{numero(maiorReel)}</span>
+              </p>
+            </figure>
+
+            <ul class="prints-rita" aria-label="Prints dos insights dos quatro Reels">
+              {
+                printsRita.map((p) => (
+                  <li>
+                    <a href={p.grande ?? '#'} target="_blank" rel="noopener" aria-label={`Ampliar: ${p.alt}`}>
+                      <Foto nome={p.imagem} alt={p.alt} widths={[200, 320]} sizes="(min-width: 960px) 180px, 44vw" />
+                    </a>
+                    <span>{p.rotulo}</span>
+                  </li>
+                ))
+              }
+            </ul>
+
+            <Carrossel carrossel={rita.carrossel} dono={rita.nome} />
+            <Raciocinio paragrafos={rita.raciocinio} />
+          </article>
+        </div>
+      </section>
+
+      <!-- Dra. Gabriela Horn -->
+      <section class="escuro secao caso-escuro" aria-labelledby="horn-nome">
+        <div class="largura">
+          <article class="caso" id={horn.id}>
+            <header class="caso-topo">
+              <h3 id="horn-nome" class="caso-nome">{horn.nome}</h3>
+              <p class="caso-contexto">Pela {horn.agencia}.</p>
+              <MinhaParte texto={horn.minhaParte} />
+            </header>
+            <div class="horn-prova">
+              <p class="horn-resumo">{horn.resumo}</p>
+              <p class="horn-logica">{horn.logica}</p>
+            </div>
+            <Carrossel carrossel={horn.carrossel} dono={horn.nome} />
+            <Raciocinio paragrafos={horn.raciocinio} />
+          </article>
+        </div>
+      </section>
+
+      <!-- Outros projetos -->
+      <section class="claro secao" id="outros" aria-labelledby="outros-titulo">
+        <div class="largura">
+          <h2 id="outros-titulo" class="titulo">{outrosProjetos.titulo}</h2>
+          <p class="titulo-apoio">{outrosProjetos.intro}</p>
+          <div class="outros">
+            {
+              outrosProjetos.projetos.map((p) => (
+                <article class="cartao">
+                  <div class="cartao-imagens">
+                    <figure class="print">
+                      <Foto nome={p.feed.imagem} alt={p.feed.alt} widths={[240, 360, 480]} sizes="(min-width: 960px) 190px, 34vw" />
+                    </figure>
+                    <figure class="print">
+                      <Foto nome={p.detalhe.imagem} alt={p.detalhe.alt} widths={[320, 480, 640]} sizes="(min-width: 960px) 330px, 58vw" />
+                    </figure>
+                  </div>
+                  <h3 class="cartao-nome">{p.nome}</h3>
+                  <p class="cartao-tipo">{p.tipo}</p>
+                  <p>{p.texto}</p>
+                  <MinhaParte texto={p.minhaParte} />
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <!-- Contato -->
+      <section class="escuro secao contato" id="contato" aria-labelledby="contato-titulo">
+        <div class="largura contato-grade">
+          <div>
+          <h2 id="contato-titulo" class="contato-titulo">{rodape.titulo}</h2>
+          <p class="contato-texto">{rodape.texto}</p>
+          </div>
+          <div>
+          <ul class="contato-lista">
+            <li>
+              <a class="botao botao-caja" href={whatsapp} target="_blank" rel="noopener" data-whats-principal>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d={iconeWhats} /></svg>
+                WhatsApp {contato.whatsappExibicao}
+              </a>
+            </li>
+            <li>
+              <span class="contato-rotulo">E-mail</span>
+              <a class="contato-link" href={`mailto:${contato.email}`}>{contato.email}</a>
+            </li>
+            <li>
+              <span class="contato-rotulo">LinkedIn</span>
+              <a class="contato-link" href={contato.linkedin} target="_blank" rel="noopener">
+                linkedin.com/in/esther-torres-4472672b3
+              </a>
+            </li>
+          </ul>
+          <p class="contato-formato">{contato.formato}</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape escuro">
+      <p>{capa.nome}, {capa.funcao.toLowerCase()}.</p>
+    </footer>
+
+    <a class="whats-fixo" href={whatsapp} target="_blank" rel="noopener" data-whats-fixo>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d={iconeWhats} /></svg>
+      {capa.botao}
+    </a>
+
+    <script>
+      // O botão fixo some quando outro botão de WhatsApp já está na tela.
+      const fixo = document.querySelector<HTMLElement>('[data-whats-fixo]');
+      const principais = document.querySelectorAll('[data-whats-principal]');
+      if (fixo && 'IntersectionObserver' in window) {
+        const visiveis = new Set<Element>();
+        const obs = new IntersectionObserver((entradas) => {
+          entradas.forEach((e) => (e.isIntersecting ? visiveis.add(e.target) : visiveis.delete(e.target)));
+          fixo.classList.toggle('escondido', visiveis.size > 0);
+        });
+        principais.forEach((p) => obs.observe(p));
+      }
+    </script>
+  </body>
+</html>
