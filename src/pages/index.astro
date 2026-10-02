@@ -355,7 +355,7 @@ const estrela = 'M10 0Q10 10 20 10Q10 10 10 20Q10 10 0 10Q10 10 10 0Z';
                     printsRita.map((p, i) => (
                       <li style={`--i:${i}`}>
                         <a href={p.grande ?? '#'} data-ampliar aria-label={`Ampliar: ${p.alt}`}>
-                          <Foto nome={p.imagem} alt={p.alt} widths={[200, 320]} sizes="(min-width: 960px) 140px, 44vw" />
+                          <Foto nome={p.imagem} alt={p.alt} widths={[240, 360]} sizes="(min-width: 960px) 220px, 44vw" foco={p.foco} />
                         </a>
                         <span class:list={['print-tag', `print-tag-${p.tipo}`]}>
                           {p.tipo === 'antes' ? 'Reel anterior' : 'Com roteiro meu'}
@@ -425,38 +425,38 @@ const estrela = 'M10 0Q10 10 20 10Q10 10 10 20Q10 10 0 10Q10 10 10 0Z';
         </div>
       </section>
 
-      <!-- Contato -->
+      <!-- Contato: espelho da capa, com o retrato no arco à esquerda -->
       <section class="escuro secao contato com-ilustra ondula" id="contato" aria-labelledby="contato-titulo">
         <Ilustracao tipo="sol" class="il-contato" paralaxe={0.1} />
         <div class="largura contato-grade">
-          <div>
-            <div class="contato-retrato" data-revela="escala">
-              <Foto nome={capa.retrato} alt="" widths={[160, 240]} sizes="120px" />
+          <div class="contato-arco" data-revela="escala">
+            <div class="arco arco-contato">
+              <Foto nome={capa.retrato} alt={rodape.retratoAlt} widths={[280, 420, 560]} sizes="(min-width: 960px) 300px, 60vw" />
             </div>
+          </div>
+          <div class="contato-texto-bloco">
             <p class="contato-chamada" data-revela>{rodape.chamada}</p>
             <h2 id="contato-titulo" class="contato-titulo" data-revela="palavras">{rodape.titulo}</h2>
             <p class="contato-texto" data-revela>{rodape.texto}</p>
-          </div>
-          <div class="contato-acoes" data-revela="cascata">
-            <a class="botao botao-caja" href={whatsapp} target="_blank" rel="noopener" style="--i:0">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d={iconeWhats}></path></svg>
-              {contato.botaoWhatsapp}
-            </a>
-            <div class="contato-email" style="--i:1">
-              <a class="botao botao-contorno" href={`mailto:${contato.email}`}>
+            <div class="contato-acoes" data-revela="cascata">
+              <a class="botao botao-caja" href={whatsapp} target="_blank" rel="noopener" style="--i:0">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d={iconeWhats}></path></svg>
+                {contato.botaoWhatsapp}
+              </a>
+              <a class="botao botao-contorno" href={`mailto:${contato.email}`} style="--i:1">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3z M3 7l9 6 9-6"></path></svg>
                 {contato.botaoEmail}
               </a>
-              <button type="button" class="copiar" data-copiar={contato.email}>
-                <span data-copiar-texto>{contato.botaoCopiar}</span>
-              </button>
+              <a class="botao botao-contorno botao-linkedin" href={contato.linkedin} target="_blank" rel="noopener" style="--i:2">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 9h3.5v11H4z M5.75 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4z M10 9h3.4v1.6c.5-.9 1.7-1.9 3.6-1.9 3.6 0 4 2.3 4 5.3V20h-3.5v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V20H10z"></path>
+                </svg>
+                {contato.botaoLinkedin}
+              </a>
             </div>
-            <a class="botao botao-contorno botao-linkedin" href={contato.linkedin} target="_blank" rel="noopener" style="--i:2">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M4 9h3.5v11H4z M5.75 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4z M10 9h3.4v1.6c.5-.9 1.7-1.9 3.6-1.9 3.6 0 4 2.3 4 5.3V20h-3.5v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V20H10z"></path>
-              </svg>
-              {contato.botaoLinkedin}
-            </a>
+            <button type="button" class="copiar" data-copiar={contato.email}>
+              <span data-copiar-texto>{contato.botaoCopiar}</span>
+            </button>
           </div>
         </div>
       </section>

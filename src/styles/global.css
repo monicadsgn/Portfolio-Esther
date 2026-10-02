@@ -229,10 +229,6 @@ body::after {
   transition: transform 0.45s var(--suave);
 }
 
-.menu.menu-oculto {
-  transform: translate(-50%, calc(-100% - 24px));
-}
-
 .menu a {
   text-decoration: none;
 }
@@ -1184,9 +1180,8 @@ body::after {
 .prints-rita .vazio {
   width: 100%;
   height: auto;
-  aspect-ratio: 1;
+  aspect-ratio: 739 / 900;
   object-fit: cover;
-  object-position: top;
   transition: transform 0.4s var(--suave);
 }
 
@@ -1624,52 +1619,46 @@ body::after {
   }
 }
 
-/* ---------- Contato ---------- */
+/* ---------- Contato: espelho da capa ---------- */
 .contato-grade {
   display: grid;
-  gap: 2rem 4rem;
+  gap: 2.5rem;
+  align-items: center;
+  justify-items: center;
+  max-width: 60rem;
 }
 
-@media (min-width: 960px) {
-  .contato-grade {
-    grid-template-columns: 1.1fr 1fr;
-    align-items: end;
-  }
+.contato-arco {
+  width: min(70vw, 19rem);
 }
 
-.contato-retrato {
-  width: 7.5rem;
-  aspect-ratio: 1;
-  margin-bottom: 1.5rem;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow: 0 0 0 5px var(--mata), 0 0 0 6px var(--caja);
+.arco-contato {
+  translate: none;
 }
 
-.contato-retrato img {
+.contato-texto-bloco {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 28%;
 }
 
 .contato-chamada {
-  margin-bottom: 0.5rem;
   font-weight: 700;
   color: var(--caja);
 }
 
 .contato-titulo {
+  margin-top: 0.5rem;
   font-family: var(--titulo);
   font-weight: 400;
-  font-size: clamp(2.6rem, 8vw, 5rem);
-  line-height: 1.02;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  line-height: 1.04;
   letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 .contato-texto {
-  margin-top: 1rem;
-  font-size: 1.15rem;
+  max-width: 32rem;
+  margin-top: 1.25rem;
+  font-size: 1.1rem;
   color: var(--apoio-escuro);
 }
 
@@ -1677,19 +1666,27 @@ body::after {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 0.75rem;
+  margin-top: 2rem;
 }
 
-.contato-email {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 1rem;
+/* WhatsApp em destaque na primeira linha; e-mail e LinkedIn lado a lado. */
+@media (min-width: 520px) {
+  .contato-acoes {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: start;
+  }
+  .contato-acoes .botao-caja {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
 }
 
 .copiar {
   min-height: 2.75rem;
-  padding: 0 0.25rem;
+  margin-top: 0.5rem;
+  padding: 0;
   border: 0;
   background: none;
   color: var(--apoio-escuro);
@@ -1704,10 +1701,15 @@ body::after {
   color: var(--caja);
 }
 
-.contato-formato {
-  margin-top: 0.5rem;
-  font-weight: 600;
-  color: var(--apoio-escuro);
+@media (min-width: 900px) {
+  .contato-grade {
+    grid-template-columns: auto 1fr;
+    gap: 4.5rem;
+    justify-items: start;
+  }
+  .contato-arco {
+    width: 19rem;
+  }
 }
 
 /* ---------- Chita e rodapé ---------- */

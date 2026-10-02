@@ -185,21 +185,27 @@ export const rita = {
       imagem: 'rita-antes-reel-procedimento-so-porque-viu-insights.jpg',
       alt: 'Insights de um Reel anterior da Dra. Rita Leão sobre fazer procedimento só porque viu no Instagram de alguém: 349 visualizações.',
       tipo: 'antes',
+      /** Altura do recorte (0 = topo, 100 = base) para o número de visualizações aparecer. */
+      foco: 50,
     },
     {
       imagem: 'rita-antes-reel-pele-seca-inverno-insights.jpg',
       alt: 'Insights de um Reel anterior da Dra. Rita Leão sobre pele seca no inverno: 518 visualizações.',
       tipo: 'antes',
+      /** Altura do recorte (0 = topo, 100 = base) para o número de visualizações aparecer. */
+      foco: 50,
     },
     {
       imagem: 'rita-depois-reel-pele-na-menopausa-insights.jpg',
       alt: 'Insights do Reel da Dra. Rita Leão sobre pele na menopausa, com roteiro da Esther: 5.069 visualizações.',
       tipo: 'depois',
+      foco: 70,
     },
     {
       imagem: 'rita-depois-reel-melhor-resultado-insights.jpg',
       alt: 'Insights do Reel da Dra. Rita Leão sobre o melhor resultado, com roteiro da Esther: 3.329 visualizações.',
       tipo: 'depois',
+      foco: 70,
     },
   ],
   carrossel: {
@@ -315,6 +321,7 @@ export const outrosProjetos = {
 };
 
 export const rodape = {
+  retratoAlt: 'Retrato da Esther Torres sorrindo, com cabelo preto e cacheado.',
   chamada: 'Gostou do que viu?',
   titulo: 'Vamos planejar o seu próximo mês?',
   texto:

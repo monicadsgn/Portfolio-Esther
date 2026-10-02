@@ -9,9 +9,11 @@ interface Props {
   sizes: string;
   class?: string;
   eager?: boolean;
+  /** Posição vertical do recorte, em %, quando a imagem é cortada pelo CSS. */
+  foco?: number;
 }
 
-const { nome, alt, widths, sizes, class: classe, eager = false } = Astro.props;
+const { nome, alt, widths, sizes, class: classe, eager = false, foco } = Astro.props;
 const src = imagem(nome);
 ---
 
@@ -28,6 +30,7 @@ const src = imagem(nome);
       loading={eager ? 'eager' : 'lazy'}
       fetchpriority={eager ? 'high' : undefined}
       decoding="async"
+      style={foco !== undefined ? `object-position: 50% ${foco}%` : undefined}
     />
   ) : (
     <div class:list={['vazio', classe]} role="img" aria-label={`Imagem pendente: ${alt}`}>

@@ -99,7 +99,7 @@ function paralaxe() {
   }
 }
 
-/** Menu: marcador que desliza até a seção atual, barra de leitura e esconde ao descer. */
+/** Menu: marcador que desliza até a seção atual e barra de leitura. Fica sempre parado no lugar. */
 function menu() {
   const barra = document.querySelector<HTMLElement>('[data-menu-barra]');
   const marcador = document.querySelector<HTMLElement>('.menu-marcador');
@@ -133,18 +133,12 @@ function menu() {
     });
   }
 
-  let ultimo = window.scrollY;
   let pedido = 0;
   const rolar = () => {
     pedido = 0;
     const y = window.scrollY;
     const total = document.documentElement.scrollHeight - window.innerHeight;
     barra.style.setProperty('--progresso', String(total > 0 ? y / total : 0));
-    if (!barra.contains(document.activeElement)) {
-      barra.classList.toggle('menu-oculto', y > 240 && y > ultimo + 4);
-      if (y < ultimo - 4) barra.classList.remove('menu-oculto');
-    }
-    ultimo = y;
   };
   window.addEventListener('scroll', () => (pedido ||= requestAnimationFrame(rolar)), { passive: true });
   window.addEventListener('resize', () => marcar(links.find((l) => l.hasAttribute('aria-current')) ?? null));
