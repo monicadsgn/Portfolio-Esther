@@ -33,27 +33,57 @@ export const capa = {
   botao: 'Conversar no WhatsApp',
 };
 
+export type Experiencia = {
+  empresa: string;
+  cargo?: string;
+  sobre?: string;
+  texto: string;
+  resultado?: string;
+};
+
 export const ondeAtuei = {
   titulo: 'Onde atuei',
-  destaques: [
+  experiencias: [
     {
-      nome: 'V4 Company',
-      descricao: '',
-      clientes: ['Ateliê Noiva & Cia', 'Trajeton Magazine'],
+      empresa: 'V4 Company',
+      cargo: 'Redatora e conteudista',
+      texto:
+        'Planejei e executei campanhas e ações de comunicação, externas e internas (endomarketing), com base em SEO. Escrevi copys persuasivas para diversos canais e newsletters para clientes e colaboradores. Nas contas de varejo, entregava o calendário e os textos prontos pra designer.',
     },
     {
-      nome: 'Numit',
-      descricao: 'Agência especializada em marketing para médicos.',
-      clientes: ['Dra. Rita Leão', 'Dra. Gabriela Horn'],
+      empresa: 'Numit',
+      sobre: 'Agência especializada em marketing para médicos.',
+      texto:
+        'Cuidava do planejamento do mês de perfis de médicas: tema, texto dos carrosséis e roteiro dos Reels e dos vídeos de lançamento, sempre na voz de cada médica.',
+      resultado:
+        'Em um dos perfis, os Reels com roteiro meu chegaram a 5.069 e 3.329 visualizações. Os anteriores tinham 349 e 518.',
     },
-  ],
-  outras: ['C2S', 'BSN Tec'],
+    {
+      empresa: 'Por conta própria',
+      sobre: 'Sem agência, direto com o perfil.',
+      texto: 'Estratégia de conteúdo de um perfil grande de preparação para procuradorias.',
+      resultado:
+        'O perfil foi de 190 mil para 197 mil seguidores em 4 meses. Na campanha Vitalício deste ano, foram 2.400 matrículas.',
+    },
+    {
+      empresa: 'C2S (Contact2Sale)',
+      cargo: 'Copywriter e growth marketing',
+      texto:
+        'Escrevi textos para diferentes canais, com foco em conversão e engajamento. Apoiei ações de branding e mídia para fortalecer o reconhecimento da marca, implementei estratégias de growth marketing para expandir a base de clientes e fiz UX writing em landing pages e interfaces.',
+    },
+    {
+      empresa: 'BSN Tec',
+      cargo: 'Redatora e conteudista',
+      texto:
+        'Desenvolvi e implementei ações de comunicação em diversos canais, com foco em SEO. Apoiei a implantação da marca e o branding, e fiz UX writing em interfaces.',
+    },
+  ] as Experiencia[],
 };
 
 export const sobre = {
   titulo: 'Sobre mim',
   paragrafos: [
-    'Atuo como social media há 4 anos. Passei pela V4 Company, pela Numit, agência especializada em médicos, pela C2S e pela BSN Tec.',
+    'Atuo como social media há 4 anos, em agência e por conta própria.',
     'Meu forte é a escrita: copywriting, criação de pautas e planejamento de conteúdo. Também trabalho com marketing de conteúdo, SEO, redação publicitária e UX writing.',
     'Trabalho com base em dados e performance. Uso os resultados pra entender o que funciona, ajustar a comunicação e orientar as próximas decisões.',
     'Gosto de trabalhar com nichos diferentes. Cada um me faz explorar a criatividade e aprender algo novo.',
@@ -72,7 +102,7 @@ export const comoTrabalho = {
   frase: 'Eu planejo o mês antes de ele começar.',
   complemento:
     'Tema, texto e roteiro ficam prontos antes. Depois olho os números pra decidir o próximo passo.',
-  formato: 'Formato de trabalho: remoto.',
+  prova: 'Em setembro, planejei 5 carrosséis para a Dra. Rita Leão e 7 para a Dra. Gabriela Horn.',
 };
 
 export type Card = { imagem: string; texto: string };
@@ -81,17 +111,18 @@ export type Carrossel = {
   titulo: string;
   descricao: string;
   cards: Card[];
+  /** Opcional: link do post publicado. Quando preenchido, aparece o botão "Ver o post publicado". */
+  link?: string;
 };
 
 export const destaques = {
-  titulo: 'Destaques',
-  intro: 'Três trabalhos, cada um com a sua prova.',
+  titulo: 'Trabalhos em destaque',
 };
 
 export const revisao = {
   id: 'revisao',
   nome: 'Revisão Ensino Jurídico',
-  contexto: 'Trabalhei por conta própria, sem agência, em um perfil grande de preparação para procuradorias.',
+  contexto: 'Por conta própria, num perfil grande de preparação para procuradorias.',
   minhaParte: 'a estratégia de conteúdo.',
   seguidores: {
     antes: '190 mil',
@@ -109,11 +140,11 @@ export const revisao = {
   print: {
     imagem: 'revisao-perfil-seguidores.jpg',
     alt: 'Print do topo do perfil Revisão Ensino Jurídico no Instagram, com 9.351 posts, 197 mil seguidores e 297 seguindo.',
-    legenda: 'O perfil tem 197 mil seguidores hoje. Print de 01/10/2026.',
+    legenda: 'O perfil hoje: 197 mil seguidores.',
   },
   raciocinio: [
-    'Trabalhei por conta própria, sem agência. Minha parte foi a estratégia de conteúdo do perfil.',
-    'O único número com print é o de 197 mil seguidores hoje. Os outros são do período em que atuei.',
+    'O perfil já era grande quando entrei, com 190 mil seguidores. Sem agência no meio, minha parte foi a estratégia de conteúdo.',
+    'Em 4 meses, chegou a 197 mil. Na mesma época, a campanha do Vitalício somou 2.400 matrículas.',
   ],
   /**
    * Opcional. Só aparece no site quando preenchido.
@@ -158,8 +189,8 @@ export const rita = {
     },
   ],
   carrossel: {
-    titulo: 'Carrossel de 02/09, aberto',
-    descricao: 'Publicado. Capa de gancho, 5 cards e legenda, escritos na voz da médica.',
+    titulo: 'O envelhecimento que aparece antes das rugas',
+    descricao: 'Carrossel publicado, escrito na voz da médica. A capa fisga, os cards explicam e o último leva para a consulta.',
     cards: [
       {
         imagem: 'rita-carrossel-02-09-card-1-capa.jpg',
@@ -184,7 +215,7 @@ export const rita = {
     ],
   } as Carrossel,
   raciocinio: [
-    'Em setembro, planejei 5 carrosséis do mês. O de 02/09 está aberto aqui em cima, card a card.',
+    'Em setembro, planejei 5 carrosséis do mês. Um deles está aberto aqui em cima, card a card.',
     'Participei da reformulação da linha editorial: levantei as referências visuais junto com a Dra. Rita Leão para orientar a arte.',
   ],
 };
@@ -197,8 +228,8 @@ export const horn = {
   resumo: 'Roteiros de vídeo dos lançamentos Exomine (exossomos autólogos) e LhaLa Peel, ambos publicados.',
   logica: 'O roteiro parte da dor da paciente e coloca o diagnóstico antes do procedimento.',
   carrossel: {
-    titulo: 'Carrossel de 02/09, aberto',
-    descricao: 'Publicado. Fala de tecnologia nova sem prometer resultado.',
+    titulo: 'Por que tanta gente fala de exossomos vegetais',
+    descricao: 'Carrossel publicado. Apresenta uma tecnologia nova sem prometer resultado.',
     cards: [
       {
         imagem: 'horn-carrossel-02-09-card-1-capa.jpg',
@@ -227,9 +258,9 @@ export const horn = {
     ],
   } as Carrossel,
   raciocinio: [
-    'Escrevi os roteiros de vídeo dos lançamentos Exomine (exossomos autólogos) e LhaLa Peel, os dois publicados.',
-    'O roteiro parte da dor da paciente e coloca o diagnóstico antes do procedimento.',
-    'O calendário de setembro teve 7 carrosséis planejados. O de 02/09, sobre exossomos vegetais, fala de tecnologia nova sem prometer resultado.',
+    'Nos roteiros dos lançamentos, a paciente se reconhece primeiro na queixa. Depois vem o diagnóstico, e só então o procedimento.',
+    'Com tecnologia nova, o cuidado é não prometer resultado. O carrossel explica o que está sendo estudado e deixa a indicação como decisão clínica.',
+    'No calendário de setembro, foram 7 carrosséis planejados.',
   ],
 };
 

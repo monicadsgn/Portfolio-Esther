@@ -18,7 +18,7 @@ O sálvia da arte da Dra. Gabriela Horn fica em torno de `#7E9A68`, médio e aci
 
 ## Fontes
 
-- **Bricolage Grotesque** (variável, títulos). Em peso alto e tamanho grande ela tem cara de letreiro pintado à mão, de placa de feira e capa de cordel. É a brasilidade nas letras, sem cair em fonte temática. O título é tratado como forma: corpo enorme, entrelinha apertada, quebras de linha escolhidas.
+- **Marcellus** (títulos e números). Trocada a pedido da Moni, a partir da referência da Amoria (paga): traço com contraste, terminais abertos e estrutura quase sem serifa, elegante e próxima. Se a licença da Amoria for comprada, basta trocar `--titulo` em `src/styles/global.css` e servir o arquivo da fonte. A primeira versão usava Bricolage Grotesque.
 - **Hanken Grotesk** (variável, texto). Sem serifa aberta, legível no celular, neutra o bastante para não brigar com a de cima.
 
 As duas são servidas pelo próprio site (sem Google Fonts), com `font-display: swap`.
@@ -82,6 +82,6 @@ O retrato fica dentro de um **arco** (portal de igreja colonial, janela de casar
 - **Trocado:** a primeira ideia de fundo era um off-white quente. Isso é o combo creme mais terracota que o briefing manda evitar. Virou capim, um verde claríssimo.
 - **Trocado:** a primeira ideia era usar a constelação nos números do Revisão (sugestão do briefing). Mas a ousadia deve ficar em um lugar só, e o calendário que se desenha conta a tese central melhor que dois números. No Revisão ficou só uma linha fina estática entre 190 mil e 197 mil, sem animação.
 - **Trocado:** retrato em círculo é o padrão de qualquer portfólio. Virou arco de portal, com o sol atrás.
-- **Trocado:** chita, azulejo e folhagem tropical entraram e saíram. Ficou só o cobogó (no calendário) e o traço fino de sol e lua. Contenção.
+- **Trocado:** chita, azulejo e folhagem tropical entraram e saíram. Ficou só o cobogó (no calendário) e o traço fino de sol e lua. Contenção. Depois, a pedido, entrou uma faixa estreita de chita (flor de cajá com miolo de urucum) só acima do rodapé.
 - **Trocado:** os títulos de seção não têm etiqueta em caixa-alta espaçada nem número 01/02/03. A navegação é pelo menu e pelos próprios títulos.
 - **Mantido:** dois pesos de bloco (mata fechada e capim) alternando, porque isso também separa o site das artes das médicas, que são claras e acinzentadas.

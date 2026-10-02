@@ -1,5 +1,5 @@
 ---
-import '@fontsource-variable/bricolage-grotesque/standard.css';
+import '@fontsource/marcellus/400.css';
 import '@fontsource-variable/hanken-grotesk/wght.css';
 import '../styles/global.css';
 import { getImage } from 'astro:assets';
@@ -138,22 +138,27 @@ const iconeWhats =
       <section class="claro secao" id="onde" aria-labelledby="onde-titulo">
         <div class="largura">
           <h2 id="onde-titulo" class="titulo">{ondeAtuei.titulo}</h2>
-          <ul class="empresas">
+          <ol class="experiencias">
             {
-              ondeAtuei.destaques.map((e) => (
-                <li class="empresa">
-                  <p class="empresa-nome">{e.nome}</p>
-                  <div class="empresa-info">
-                    {e.descricao && <p>{e.descricao}</p>}
-                    <p>
-                      Clientes: <strong>{lista(e.clientes)}</strong>.
-                    </p>
+              ondeAtuei.experiencias.map((e) => (
+                <li class="experiencia">
+                  <div class="experiencia-quem">
+                    <h3 class="experiencia-empresa">{e.empresa}</h3>
+                    {e.cargo && <p class="experiencia-cargo">{e.cargo}</p>}
+                    {e.sobre && <p class="experiencia-sobre">{e.sobre}</p>}
+                  </div>
+                  <div class="experiencia-oque">
+                    <p>{e.texto}</p>
+                    {e.resultado && (
+                      <p class="experiencia-resultado">
+                        <strong>Resultado:</strong> {e.resultado}
+                      </p>
+                    )}
                   </div>
                 </li>
               ))
             }
-          </ul>
-          <p class="empresas-outras">Também passei pela {lista(ondeAtuei.outras)}.</p>
+          </ol>
         </div>
       </section>
 
@@ -192,7 +197,7 @@ const iconeWhats =
             <h2 id="como-titulo" class="como-rotulo">{comoTrabalho.titulo}</h2>
             <p class="como-frase">{comoTrabalho.frase}</p>
             <p class="como-complemento">{comoTrabalho.complemento}</p>
-            <p class="como-formato">{comoTrabalho.formato}</p>
+            <p class="como-prova">{comoTrabalho.prova}</p>
           </div>
           <CeuDoMes />
         </div>
@@ -202,8 +207,7 @@ const iconeWhats =
       <section class="claro secao" id="destaques" aria-labelledby="destaques-titulo">
         <div class="largura">
           <h2 id="destaques-titulo" class="titulo">{destaques.titulo}</h2>
-          <p class="titulo-apoio">{destaques.intro}</p>
-
+          
           <!-- Revisão -->
           <article class="caso" id={revisao.id} aria-labelledby="revisao-nome">
             <header class="caso-topo">
@@ -394,6 +398,7 @@ const iconeWhats =
       </section>
     </main>
 
+    <div class="chita" aria-hidden="true"></div>
     <footer class="rodape escuro">
       <p>{capa.nome}, {capa.funcao.toLowerCase()}.</p>
     </footer>
