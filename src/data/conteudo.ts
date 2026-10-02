@@ -91,15 +91,6 @@ export const sobre = {
     'Atuo como social media há 4 anos, em agência e em projeto independente. Uso os números pra entender o que funciona e decidir o próximo passo.',
     'Gosto de nichos diferentes. Cada um me faz explorar a criatividade e aprender algo novo.',
   ],
-  habilidades: [
-    'Copywriting',
-    'Criação de pautas',
-    'Planejamento de conteúdo',
-    'Marketing de conteúdo',
-    'SEO',
-    'Redação publicitária',
-    'UX writing',
-  ],
   formacao: [
     { curso: 'Comunicação e Marketing', onde: 'Anhanguera', quando: '2024' },
     { curso: 'IA Generativa em Marketing', onde: 'USP', quando: '2026' },
@@ -355,42 +346,43 @@ export const outrosProjetos = {
   ],
 };
 
+/** Frentes em que ela já atuou e pode assumir num time (agência ou empresa). */
 export const entregas = {
-  titulo: 'O que eu entrego',
-  intro: 'Do planejamento ao texto final, com os números acompanhando.',
+  titulo: 'Onde eu somo no time',
+  intro: 'Frentes em que já atuei em agência e posso assumir na sua equipe.',
   itens: [
     {
       icone: 'calendario',
       nome: 'Planejamento mensal',
-      texto: 'Calendário com tema, texto e roteiro prontos antes do mês começar.',
+      texto: 'Montei o calendário do mês de vários clientes ao mesmo tempo, com tema, texto e roteiro prontos antes.',
     },
     {
       icone: 'pena',
       nome: 'Copy para redes',
-      texto: 'Legendas, carrosséis e textos de campanha na voz de cada marca.',
+      texto: 'Escrevi legendas, carrosséis e textos de campanha na voz de cada marca.',
     },
     {
       icone: 'video',
       nome: 'Roteiros de vídeo',
-      texto: 'Reels e vídeos de lançamento, do gancho à chamada final.',
+      texto: 'Roteirizei Reels e vídeos de lançamento, do gancho à chamada final.',
     },
     {
       icone: 'lupa',
       nome: 'Conteúdo com SEO',
-      texto: 'Textos e ações de comunicação pensados para serem encontrados.',
+      texto: 'Planejei e executei ações de comunicação com base em SEO, incluindo endomarketing e newsletters.',
     },
     {
       icone: 'tela',
       nome: 'UX writing',
-      texto: 'Textos de landing pages e interfaces, claros e diretos.',
+      texto: 'Escrevi textos de landing pages e interfaces na C2S e na BSN Tec.',
     },
     {
       icone: 'grafico',
       nome: 'Leitura de resultados',
-      texto: 'Acompanho os números pra ajustar a comunicação e decidir o próximo passo.',
+      texto: 'Uso os números para ajustar a comunicação e orientar as próximas decisões.',
     },
   ],
-  nichosTitulo: 'Nichos que já atendi',
+  nichosTitulo: 'Nichos em que já trabalhei',
   nichos: ['Saúde e dermatologia', 'Educação jurídica', 'Varejo', 'Noivas e moda festa'],
 };
 
@@ -399,5 +391,5 @@ export const rodape = {
   chamada: 'Gostou do que viu?',
   titulo: 'Vamos planejar o seu próximo mês?',
   texto:
-    'Estou aberta a vagas e projetos de social media e copywriting, em trabalho remoto. O caminho mais rápido é o WhatsApp.',
+    'Estou aberta a vagas e projetos de social media e copywriting em agências e empresas, em trabalho remoto. O caminho mais rápido é o WhatsApp.',
 };

@@ -782,6 +782,7 @@ body::after {
   .sobre {
     grid-template-columns: 1.4fr 1fr;
     gap: 5rem;
+    align-items: center;
   }
 }
 
