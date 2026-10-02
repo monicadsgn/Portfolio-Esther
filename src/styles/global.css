@@ -1,18 +1,20 @@
 /* Paleta: verde manda, quente é acento. Ver PLANO.md. */
 :root {
-  --mata: #0e2a1e;
-  --mata-2: #143826;
-  --mata-3: #1d4631;
-  --bananeira: #1b6b3e;
-  --capim: #e4efd2;
-  --capim-2: #d5e5bd;
-  --caja: #f4b63f;
+  /* Paleta oliva, a partir da referência da Moni (#4E5E47, #B6C1A6, #D1D3C6) */
+  --mata: #45543f; /* oliva: fundo dos blocos escuros */
+  --mata-2: #4e5e47; /* oliva da referência: ladrilhos e cartões no escuro */
+  --mata-3: #5c6d54; /* linhas no escuro */
+  --bananeira: #4e5e47; /* títulos nos blocos claros (5,6:1) */
+  --capim: #e6e8df; /* pedra clara: fundo dos blocos claros */
+  --capim-2: #dce0d2; /* cartões nos blocos claros */
+  --salvia: #b6c1a6;
+  --caja: #f6c35f; /* 5:1 sobre o oliva */
   --urucum: #a93514;
 
-  --texto-escuro: var(--mata);
-  --texto-claro: var(--capim);
-  --apoio-escuro: #a9c2ae; /* 8:1 sobre mata fechada */
-  --apoio-claro: #3e5a47; /* 6,6:1 sobre capim */
+  --texto-escuro: #2b3527;
+  --texto-claro: #eef0e6;
+  --apoio-escuro: #cdd4c1;
+  --apoio-claro: #4f5d48;
 
   --titulo: 'Marcellus', 'Optima', 'Candara', Georgia, serif;
   --corpo: 'Hanken Grotesk Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -367,7 +369,7 @@ a {
 }
 
 .botao-caja:hover {
-  background: #ffc75a;
+  background: #ffd27a;
   transform: translateY(-2px);
 }
 
@@ -1248,9 +1250,6 @@ a {
     grid-template-columns: 1.1fr 1fr;
     align-items: end;
   }
-  .contato-lista {
-    margin-top: 0;
-  }
 }
 
 .contato-titulo {
@@ -1267,32 +1266,9 @@ a {
   color: var(--apoio-escuro);
 }
 
-.contato-lista {
-  display: grid;
-  gap: 1.5rem;
-  margin-top: 2.5rem;
-}
 
-.contato-rotulo {
-  display: block;
-  font-size: 0.9rem;
-  color: var(--apoio-escuro);
-}
 
-.contato-link {
-  font-family: var(--titulo);
-  font-weight: 400;
-  font-size: clamp(1.15rem, 4.4vw, 1.6rem);
-  line-height: 1.2;
-  overflow-wrap: anywhere;
-  text-decoration-color: var(--caja);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.2em;
-}
 
-.contato-link:hover {
-  color: var(--caja);
-}
 
 .contato-formato {
   margin-top: 2.5rem;
@@ -1376,7 +1352,349 @@ a {
 .chita {
   height: 56px;
   background-color: var(--mata);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='56' viewBox='0 0 112 56'%3E%3Cpath d='M36 24q7-9 16-4q-7 9-16 4z' fill='%231B6B3E' transform='rotate%2820 36 24%29'/%3E%3Cpath d='M20 18q7-9 16-4q-7 9-16 4z' fill='%231B6B3E' transform='rotate%28200 20 18%29'/%3E%3Cg fill='%23F4B63F'%3E%3Cellipse cx='28' cy='14' rx='4.4' ry='8.0' transform='rotate%280 28 22%29'/%3E%3Cellipse cx='28' cy='14' rx='4.4' ry='8.0' transform='rotate%2860 28 22%29'/%3E%3Cellipse cx='28' cy='14' rx='4.4' ry='8.0' transform='rotate%28120 28 22%29'/%3E%3Cellipse cx='28' cy='14' rx='4.4' ry='8.0' transform='rotate%28180 28 22%29'/%3E%3Cellipse cx='28' cy='14' rx='4.4' ry='8.0' transform='rotate%28240 28 22%29'/%3E%3Cellipse cx='28' cy='14' rx='4.4' ry='8.0' transform='rotate%28300 28 22%29'/%3E%3C/g%3E%3Ccircle cx='28' cy='22' r='4.4' fill='%23A93514'/%3E%3Cpath d='M88 38q7-9 16-4q-7 9-16 4z' fill='%231B6B3E' transform='rotate%28-30 88 38%29'/%3E%3Cg fill='%23E4EFD2'%3E%3Cellipse cx='82' cy='31' rx='2.8' ry='5.0' transform='rotate%280 82 36%29'/%3E%3Cellipse cx='82' cy='31' rx='2.8' ry='5.0' transform='rotate%2860 82 36%29'/%3E%3Cellipse cx='82' cy='31' rx='2.8' ry='5.0' transform='rotate%28120 82 36%29'/%3E%3Cellipse cx='82' cy='31' rx='2.8' ry='5.0' transform='rotate%28180 82 36%29'/%3E%3Cellipse cx='82' cy='31' rx='2.8' ry='5.0' transform='rotate%28240 82 36%29'/%3E%3Cellipse cx='82' cy='31' rx='2.8' ry='5.0' transform='rotate%28300 82 36%29'/%3E%3C/g%3E%3Ccircle cx='82' cy='36' r='2.8' fill='%23F4B63F'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='56' viewBox='0 0 112 56'%3E%3Cpath d='M36 24q7-9 16-4q-7 9-16 4z' fill='%23B6C1A6' transform='rotate%2820 36 24%29'/%3E%3Cpath d='M20 18q7-9 16-4q-7 9-16 4z' fill='%23B6C1A6' transform='rotate%28200 20 18%29'/%3E%3Cg fill='%23F6C35F'%3E%3Cellipse cx='28' cy='14' rx='4.4' ry='8.0' transform='rotate%280 28 22%29'/%3E%3Cellipse cx='28' cy='14' rx='4.4' ry='8.0' transform='rotate%2860 28 22%29'/%3E%3Cellipse cx='28' cy='14' rx='4.4' ry='8.0' transform='rotate%28120 28 22%29'/%3E%3Cellipse cx='28' cy='14' rx='4.4' ry='8.0' transform='rotate%28180 28 22%29'/%3E%3Cellipse cx='28' cy='14' rx='4.4' ry='8.0' transform='rotate%28240 28 22%29'/%3E%3Cellipse cx='28' cy='14' rx='4.4' ry='8.0' transform='rotate%28300 28 22%29'/%3E%3C/g%3E%3Ccircle cx='28' cy='22' r='4.4' fill='%23A93514'/%3E%3Cpath d='M88 38q7-9 16-4q-7 9-16 4z' fill='%23B6C1A6' transform='rotate%28-30 88 38%29'/%3E%3Cg fill='%23EEF0E6'%3E%3Cellipse cx='82' cy='31' rx='2.8' ry='5.0' transform='rotate%280 82 36%29'/%3E%3Cellipse cx='82' cy='31' rx='2.8' ry='5.0' transform='rotate%2860 82 36%29'/%3E%3Cellipse cx='82' cy='31' rx='2.8' ry='5.0' transform='rotate%28120 82 36%29'/%3E%3Cellipse cx='82' cy='31' rx='2.8' ry='5.0' transform='rotate%28180 82 36%29'/%3E%3Cellipse cx='82' cy='31' rx='2.8' ry='5.0' transform='rotate%28240 82 36%29'/%3E%3Cellipse cx='82' cy='31' rx='2.8' ry='5.0' transform='rotate%28300 82 36%29'/%3E%3C/g%3E%3Ccircle cx='82' cy='36' r='2.8' fill='%23F6C35F'/%3E%3C/svg%3E");
   background-size: 112px 56px;
   background-position: center;
+}
+
+/* ---------- Ilustrações em traço ---------- */
+.com-ilustra,
+.capa {
+  position: relative;
+  overflow: hidden;
+}
+
+.com-ilustra > .largura,
+.capa > div {
+  position: relative;
+  z-index: 1;
+}
+
+.ilustra {
+  position: absolute;
+  z-index: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.ilustra * {
+  vector-effect: non-scaling-stroke;
+}
+
+.claro .ilustra {
+  color: var(--bananeira);
+  opacity: 0.3;
+}
+
+.escuro .ilustra {
+  color: var(--salvia);
+  opacity: 0.24;
+}
+
+.il-capa {
+  width: clamp(13rem, 30vw, 21rem);
+  left: 40%;
+  bottom: -9rem;
+  transform: rotate(-28deg);
+}
+
+.il-onde {
+  width: clamp(9rem, 26vw, 17rem);
+  right: max(-2rem, (100vw - var(--max)) / 2 - 6rem);
+  top: 2.5rem;
+}
+
+.il-sobre {
+  width: clamp(9rem, 22vw, 15rem);
+  left: 46%;
+  top: -1rem;
+}
+
+.il-destaques {
+  width: clamp(8rem, 18vw, 14rem);
+  right: max(1rem, (100vw - var(--max)) / 2 + 2rem);
+  top: 0;
+  transform: rotate(32deg);
+}
+
+.il-horn {
+  width: clamp(10rem, 24vw, 18rem);
+  right: -2rem;
+  bottom: 2rem;
+  transform: scaleX(-1);
+}
+
+.il-outros {
+  width: clamp(9rem, 20vw, 15rem);
+  right: max(1rem, (100vw - var(--max)) / 2);
+  top: 2.5rem;
+}
+
+.il-contato {
+  width: clamp(14rem, 34vw, 26rem);
+  left: -4rem;
+  bottom: -6rem;
+}
+
+@media (max-width: 759px) {
+  .il-capa {
+    left: auto;
+    right: -3rem;
+    bottom: auto;
+    top: 6rem;
+  }
+  .il-destaques {
+    right: -2rem;
+  }
+  .il-sobre {
+    left: auto;
+    right: -2rem;
+  }
+  .il-onde,
+  .il-outros {
+    top: 1.5rem;
+    right: -2.5rem;
+  }
+}
+
+/* ---------- Animações (só com JS e sem movimento reduzido) ---------- */
+.anima .ilustra path,
+.anima .ilustra circle {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.anima .ilustra.visivel path,
+.anima .ilustra.visivel circle {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 2.8s cubic-bezier(0.45, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .balanca {
+    animation: balanca 9s ease-in-out infinite alternate;
+    transform-origin: 50% 100%;
+  }
+  .il-capa.balanca {
+    animation-name: balanca-capa;
+  }
+  .il-destaques.balanca {
+    animation-name: balanca-destaques;
+  }
+  .il-horn.balanca {
+    animation-name: balanca-horn;
+  }
+
+  .capa-nome span {
+    animation: nasce 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .capa-nome span + span {
+    animation-delay: 0.15s;
+  }
+  .capa-funcao,
+  .capa-linha,
+  .capa-frase,
+  .capa .botao {
+    animation: aparece 0.9s ease both 0.45s;
+  }
+  .arco {
+    animation: aparece 1.2s ease both 0.2s;
+  }
+  .sol-raios {
+    transform-origin: 300px 110px;
+    animation: gira 90s linear infinite;
+  }
+  .pisca {
+    animation: pisca 3.2s ease-in-out infinite;
+  }
+}
+
+.anima .reels-barra {
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.anima .reels.visivel .reels-barra {
+  transform: none;
+  transition: transform 1.3s cubic-bezier(0.3, 0.8, 0.2, 1);
+}
+
+.anima .reels.visivel .reels-meus .reels-barra {
+  transition-delay: 0.35s;
+}
+
+@keyframes balanca {
+  from { transform: rotate(-2deg); }
+  to { transform: rotate(2deg); }
+}
+
+@keyframes balanca-capa {
+  from { transform: rotate(-30deg); }
+  to { transform: rotate(-25deg); }
+}
+
+@keyframes balanca-destaques {
+  from { transform: rotate(30deg); }
+  to { transform: rotate(35deg); }
+}
+
+@keyframes balanca-horn {
+  from { transform: scaleX(-1) rotate(-2deg); }
+  to { transform: scaleX(-1) rotate(2deg); }
+}
+
+@keyframes nasce {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 0 -20% 0);
+  }
+}
+
+@keyframes aparece {
+  from { opacity: 0; }
+}
+
+@keyframes gira {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pisca {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+/* ---------- Menu: seção atual ---------- */
+.menu nav a[aria-current='true'] {
+  color: var(--caja);
+}
+
+/* ---------- Contato em botões ---------- */
+.contato-acoes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.contato-email {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+
+.botao-contorno {
+  border: 1.5px solid var(--caja);
+  color: var(--texto-claro);
+  background: transparent;
+}
+
+.botao-contorno svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+.botao-contorno svg path:last-child[d^='M4 9'] {
+  fill: currentColor;
+  stroke: none;
+}
+
+.botao-contorno:hover {
+  background: var(--mata-2);
+  color: var(--caja);
+  transform: translateY(-2px);
+}
+
+.copiar {
+  min-height: 2.75rem;
+  padding: 0 0.25rem;
+  border: 0;
+  background: none;
+  color: var(--apoio-escuro);
+  font: inherit;
+  font-size: 0.95rem;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  cursor: pointer;
+}
+
+.copiar:hover {
+  color: var(--caja);
+}
+
+.contato .contato-formato {
+  margin-top: 0.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  font-weight: 600;
+  color: var(--apoio-escuro);
+}
+
+.prints-dica {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--apoio-claro);
+}
+
+/* ---------- Ampliar imagem ---------- */
+a[data-ampliar] {
+  display: block;
+  cursor: zoom-in;
+}
+
+.lupa {
+  max-width: min(92vw, 34rem);
+  max-height: 92vh;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: var(--mata);
+  overflow: visible;
+}
+
+.lupa::backdrop {
+  background: rgba(30, 38, 27, 0.82);
+}
+
+.lupa img {
+  display: block;
+  max-height: 88vh;
+  width: auto;
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.lupa-fechar {
+  position: absolute;
+  top: -0.75rem;
+  right: -0.75rem;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: var(--caja);
+  color: var(--texto-escuro);
+  cursor: pointer;
+}
+
+.lupa-fechar svg {
+  width: 1.2rem;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
 }

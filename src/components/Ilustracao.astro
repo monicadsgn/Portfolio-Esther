@@ -1,0 +1,104 @@
+---
+// Ilustrações em traço fino, sempre em baixa opacidade e decorativas.
+// Se desenham uma vez quando entram na tela; folhas balançam devagar.
+type Tipo = 'bananeira' | 'ramo' | 'lua' | 'sol' | 'flor';
+
+interface Props {
+  tipo: Tipo;
+  class?: string;
+  balanca?: boolean;
+}
+
+const { tipo, class: classe, balanca = false } = Astro.props;
+const r = (n: number) => Math.round(n * 10) / 10;
+
+let viewBox = '0 0 200 200';
+const tracos: string[] = [];
+const circulos: { cx: number; cy: number; r: number }[] = [];
+
+if (tipo === 'bananeira') {
+  viewBox = '0 0 220 620';
+  tracos.push('M110 20C190 150 196 400 112 600C30 400 34 150 110 20Z');
+  tracos.push('M110 0L111 620');
+  for (let t = 0.07; t < 0.95; t += 0.035) {
+    const y = 20 + t * 580;
+    const w = Math.pow(Math.sin(Math.PI * t), 0.75) * 74;
+    tracos.push(`M111 ${r(y)}Q${r(111 + w * 0.6)} ${r(y - 18)} ${r(111 + w)} ${r(y - 34)}`);
+    tracos.push(`M110 ${r(y)}Q${r(110 - w * 0.6)} ${r(y - 18)} ${r(110 - w)} ${r(y - 34)}`);
+  }
+  // rasgos típicos da folha de bananeira
+  tracos.push('M176 250L150 262M38 330L66 338M170 410L146 418');
+}
+
+if (tipo === 'ramo') {
+  viewBox = '0 0 240 320';
+  tracos.push('M40 310C70 220 110 120 200 20');
+  for (let i = 1; i <= 9; i++) {
+    const t = i / 10;
+    const x = 40 + 160 * t + Math.sin(t * 3) * 6;
+    const y = 310 - 290 * t;
+    const lado = i % 2 ? 1 : -1;
+    const tam = 34 - t * 16;
+    const ex = x + lado * tam;
+    const ey = y - tam * 0.5;
+    tracos.push(
+      `M${r(x)} ${r(y)}Q${r(x + lado * tam * 0.5)} ${r(y - tam * 0.75)} ${r(ex)} ${r(ey)}Q${r(x + lado * tam * 0.6)} ${r(y + tam * 0.15)} ${r(x)} ${r(y)}Z`,
+    );
+  }
+}
+
+if (tipo === 'lua') {
+  viewBox = '0 0 260 220';
+  tracos.push('M120 30a80 80 0 1 0 70 118 64 64 0 1 1-70-118Z');
+  const estrelas = [
+    [200, 40, 9],
+    [232, 92, 5],
+    [214, 172, 7],
+    [36, 40, 5],
+  ];
+  estrelas.forEach(([x, y, s]) =>
+    tracos.push(`M${x} ${y - s}Q${x} ${y} ${x + s} ${y}Q${x} ${y} ${x} ${y + s}Q${x} ${y} ${x - s} ${y}Q${x} ${y} ${x} ${y - s}Z`),
+  );
+  tracos.push('M200 40L232 92L214 172');
+}
+
+if (tipo === 'sol') {
+  viewBox = '0 0 240 240';
+  circulos.push({ cx: 120, cy: 120, r: 52 }, { cx: 120, cy: 120, r: 66 });
+  for (let i = 0; i < 32; i++) {
+    const a = (i / 32) * Math.PI * 2;
+    const ini = 76;
+    const fim = i % 2 ? 98 : 114;
+    tracos.push(
+      `M${r(120 + Math.cos(a) * ini)} ${r(120 + Math.sin(a) * ini)}L${r(120 + Math.cos(a) * fim)} ${r(120 + Math.sin(a) * fim)}`,
+    );
+  }
+}
+
+if (tipo === 'flor') {
+  viewBox = '0 0 220 220';
+  for (let k = 0; k < 6; k++) {
+    const a = (k * 60 * Math.PI) / 180;
+    const x = 110 + Math.sin(a) * 34;
+    const y = 110 - Math.cos(a) * 34;
+    const px = 110 + Math.sin(a) * 68;
+    const py = 110 - Math.cos(a) * 68;
+    const nx = Math.cos(a) * 22;
+    const ny = Math.sin(a) * 22;
+    tracos.push(`M110 110Q${r(x + nx)} ${r(y + ny)} ${r(px)} ${r(py)}Q${r(x - nx)} ${r(y - ny)} 110 110Z`);
+  }
+  circulos.push({ cx: 110, cy: 110, r: 14 });
+  tracos.push('M150 170q30-8 52 14q-32 8-52-14ZM70 172q-30-6-50 16q32 6 50-16Z');
+}
+---
+
+<svg
+  class:list={['ilustra', `ilustra-${tipo}`, classe, { balanca }]}
+  viewBox={viewBox}
+  aria-hidden="true"
+  focusable="false"
+  data-anima
+>
+  {tracos.map((d) => <path d={d} pathLength="1" />)}
+  {circulos.map((c) => <circle cx={c.cx} cy={c.cy} r={c.r} pathLength="1" />)}
+</svg>

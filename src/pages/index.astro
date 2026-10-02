@@ -9,6 +9,7 @@ import MinhaParte from '../components/MinhaParte.astro';
 import Raciocinio from '../components/Raciocinio.astro';
 import Carrossel from '../components/Carrossel.astro';
 import CeuDoMes from '../components/CeuDoMes.astro';
+import Ilustracao from '../components/Ilustracao.astro';
 import { imagem } from '../lib/assets';
 import {
   site,
@@ -36,6 +37,14 @@ const ampliar = async (nome: string) => {
   return src ? (await getImage({ src, width: Math.min(src.width, 900), format: 'webp' })).src : undefined;
 };
 const printsRita = await Promise.all(rita.prints.map(async (p) => ({ ...p, grande: await ampliar(p.imagem) })));
+const revisaoGrande = await ampliar(revisao.print.imagem);
+const projetos = await Promise.all(
+  outrosProjetos.projetos.map(async (p) => ({
+    ...p,
+    feedGrande: await ampliar(p.feed.imagem),
+    detalheGrande: await ampliar(p.detalhe.imagem),
+  })),
+);
 
 const lista = (itens: string[]) =>
   itens.length > 1 ? `${itens.slice(0, -1).join(', ')} e ${itens[itens.length - 1]}` : itens.join('');
@@ -51,7 +60,7 @@ const iconeWhats =
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{site.titulo}</title>
     <meta name="description" content={site.descricao} />
-    <meta name="theme-color" content="#0E2A1E" />
+    <meta name="theme-color" content="#45543F" />
     <link rel="canonical" href={site.url + '/'} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
@@ -75,9 +84,9 @@ const iconeWhats =
       <a class="menu-nome" href="#topo">{capa.nome}</a>
       <nav aria-label="Seções">
         <ul>
-          <li><a href="#destaques">Trabalhos</a></li>
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#contato">Contato</a></li>
+          <li><a href="#onde" data-menu>Atuação</a></li>
+          <li><a href="#destaques" data-menu>Trabalhos</a></li>
+          <li><a href="#contato" data-menu>Contato</a></li>
         </ul>
       </nav>
     </header>
@@ -85,6 +94,7 @@ const iconeWhats =
     <main id="conteudo">
       <!-- Capa -->
       <section class="capa escuro" id="topo" aria-labelledby="nome">
+        <Ilustracao tipo="bananeira" class="il-capa" balanca />
         <div class="capa-texto">
           <h1 id="nome" class="capa-nome">
             <span>Esther</span>
@@ -119,8 +129,9 @@ const iconeWhats =
               }
             </g>
             <path class="lua" d="M46 30a26 26 0 1 0 24 36 21 21 0 1 1-24-36Z" />
-            <circle class="ponto" cx="84" cy="22" r="2.2" />
-            <circle class="ponto" cx="24" cy="96" r="1.6" />
+            <circle class="ponto pisca" cx="84" cy="22" r="2.2" />
+            <circle class="ponto pisca" cx="24" cy="96" r="1.6" style="animation-delay:1.3s" />
+            <circle class="ponto pisca" cx="372" cy="300" r="1.8" style="animation-delay:2.1s" />
           </svg>
           <div class="arco">
             <Foto
@@ -135,7 +146,8 @@ const iconeWhats =
       </section>
 
       <!-- Onde atuei -->
-      <section class="claro secao" id="onde" aria-labelledby="onde-titulo">
+      <section class="claro secao com-ilustra" id="onde" aria-labelledby="onde-titulo">
+        <Ilustracao tipo="ramo" class="il-onde" balanca />
         <div class="largura">
           <h2 id="onde-titulo" class="titulo">{ondeAtuei.titulo}</h2>
           <ol class="experiencias">
@@ -163,7 +175,8 @@ const iconeWhats =
       </section>
 
       <!-- Sobre -->
-      <section class="claro secao secao-sobre" id="sobre" aria-labelledby="sobre-titulo">
+      <section class="claro secao secao-sobre com-ilustra" id="sobre" aria-labelledby="sobre-titulo">
+        <Ilustracao tipo="lua" class="il-sobre" />
         <div class="largura sobre">
           <div class="sobre-texto">
             <h2 id="sobre-titulo" class="titulo">{sobre.titulo}</h2>
@@ -204,7 +217,8 @@ const iconeWhats =
       </section>
 
       <!-- Destaques -->
-      <section class="claro secao" id="destaques" aria-labelledby="destaques-titulo">
+      <section class="claro secao com-ilustra" id="destaques" aria-labelledby="destaques-titulo">
+        <Ilustracao tipo="bananeira" class="il-destaques" balanca />
         <div class="largura">
           <h2 id="destaques-titulo" class="titulo">{destaques.titulo}</h2>
           
@@ -219,20 +233,20 @@ const iconeWhats =
               <div class="revisao-numeros">
                 <div class="seguidores">
                   <p class="numero">
-                    <strong>{revisao.seguidores.antes}</strong>
+                    <strong data-conta={revisao.seguidores.antes}>{revisao.seguidores.antes}</strong>
                     <span>{revisao.seguidores.antesRotulo}</span>
                   </p>
                   <svg class="seguidores-linha" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true">
                     <line x1="4" y1="10" x2="96" y2="10" vector-effect="non-scaling-stroke" />
                   </svg>
                   <p class="numero">
-                    <strong>{revisao.seguidores.depois}</strong>
+                    <strong data-conta={revisao.seguidores.depois}>{revisao.seguidores.depois}</strong>
                     <span>{revisao.seguidores.depoisRotulo}</span>
                   </p>
                 </div>
                 <div class="campanha">
                   <p class="numero numero-grande">
-                    <strong>{revisao.campanha.numero}</strong>
+                    <strong data-conta={revisao.campanha.numero}>{revisao.campanha.numero}</strong>
                     <span>{revisao.campanha.rotulo}</span>
                   </p>
                   <p class="campanha-explica">{revisao.campanha.explicacao}</p>
@@ -240,12 +254,14 @@ const iconeWhats =
                 <p class="nota">{revisao.nota}</p>
               </div>
               <figure class="print print-revisao">
-                <Foto
-                  nome={revisao.print.imagem}
-                  alt={revisao.print.alt}
-                  widths={[380, 560, 738]}
-                  sizes="(min-width: 960px) 420px, 92vw"
-                />
+                <a href={revisaoGrande ?? '#'} data-ampliar aria-label={`Ampliar: ${revisao.print.alt}`}>
+                  <Foto
+                    nome={revisao.print.imagem}
+                    alt={revisao.print.alt}
+                    widths={[380, 560, 738]}
+                    sizes="(min-width: 960px) 420px, 92vw"
+                  />
+                </a>
                 <figcaption>{revisao.print.legenda}</figcaption>
               </figure>
             </div>
@@ -274,7 +290,7 @@ const iconeWhats =
               <MinhaParte texto={rita.minhaParte} />
             </header>
 
-            <figure class="reels">
+            <figure class="reels" data-anima>
               <figcaption class="reels-resumo">{rita.resumo}</figcaption>
               {
                 gruposReels.map((grupo) => (
@@ -304,7 +320,7 @@ const iconeWhats =
               {
                 printsRita.map((p) => (
                   <li>
-                    <a href={p.grande ?? '#'} target="_blank" rel="noopener" aria-label={`Ampliar: ${p.alt}`}>
+                    <a href={p.grande ?? '#'} data-ampliar aria-label={`Ampliar: ${p.alt}`}>
                       <Foto nome={p.imagem} alt={p.alt} widths={[200, 320]} sizes="(min-width: 960px) 180px, 44vw" />
                     </a>
                     <span>{p.rotulo}</span>
@@ -312,6 +328,7 @@ const iconeWhats =
                 ))
               }
             </ul>
+            <p class="prints-dica">Toque em um print para ampliar.</p>
 
             <Carrossel carrossel={rita.carrossel} dono={rita.nome} />
             <Raciocinio paragrafos={rita.raciocinio} />
@@ -320,7 +337,8 @@ const iconeWhats =
       </section>
 
       <!-- Dra. Gabriela Horn -->
-      <section class="escuro secao caso-escuro" aria-labelledby="horn-nome">
+      <section class="escuro secao caso-escuro com-ilustra" aria-labelledby="horn-nome">
+        <Ilustracao tipo="ramo" class="il-horn" balanca />
         <div class="largura">
           <article class="caso" id={horn.id}>
             <header class="caso-topo">
@@ -339,21 +357,22 @@ const iconeWhats =
       </section>
 
       <!-- Outros projetos -->
-      <section class="claro secao" id="outros" aria-labelledby="outros-titulo">
+      <section class="claro secao com-ilustra" id="outros" aria-labelledby="outros-titulo">
+        <Ilustracao tipo="flor" class="il-outros" />
         <div class="largura">
           <h2 id="outros-titulo" class="titulo">{outrosProjetos.titulo}</h2>
           <p class="titulo-apoio">{outrosProjetos.intro}</p>
           <div class="outros">
             {
-              outrosProjetos.projetos.map((p) => (
+              projetos.map((p) => (
                 <article class="cartao">
                   <div class="cartao-imagens">
-                    <figure class="print">
+                    <a class="print" href={p.feedGrande ?? '#'} data-ampliar aria-label={`Ampliar: ${p.feed.alt}`}>
                       <Foto nome={p.feed.imagem} alt={p.feed.alt} widths={[240, 360, 480]} sizes="(min-width: 960px) 190px, 34vw" />
-                    </figure>
-                    <figure class="print">
+                    </a>
+                    <a class="print" href={p.detalheGrande ?? '#'} data-ampliar aria-label={`Ampliar: ${p.detalhe.alt}`}>
                       <Foto nome={p.detalhe.imagem} alt={p.detalhe.alt} widths={[320, 480, 640]} sizes="(min-width: 960px) 330px, 58vw" />
-                    </figure>
+                    </a>
                   </div>
                   <h3 class="cartao-nome">{p.nome}</h3>
                   <p class="cartao-tipo">{p.tipo}</p>
@@ -367,32 +386,32 @@ const iconeWhats =
       </section>
 
       <!-- Contato -->
-      <section class="escuro secao contato" id="contato" aria-labelledby="contato-titulo">
+      <section class="escuro secao contato com-ilustra" id="contato" aria-labelledby="contato-titulo">
+        <Ilustracao tipo="sol" class="il-contato" />
         <div class="largura contato-grade">
           <div>
-          <h2 id="contato-titulo" class="contato-titulo">{rodape.titulo}</h2>
-          <p class="contato-texto">{rodape.texto}</p>
+            <h2 id="contato-titulo" class="contato-titulo">{rodape.titulo}</h2>
+            <p class="contato-texto">{rodape.texto}</p>
           </div>
-          <div>
-          <ul class="contato-lista">
-            <li>
-              <a class="botao botao-caja" href={whatsapp} target="_blank" rel="noopener" data-whats-principal>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d={iconeWhats} /></svg>
-                WhatsApp {contato.whatsappExibicao}
+          <div class="contato-acoes">
+            <a class="botao botao-caja" href={whatsapp} target="_blank" rel="noopener" data-whats-principal>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d={iconeWhats} /></svg>
+              {contato.botaoWhatsapp}
+            </a>
+            <div class="contato-email">
+              <a class="botao botao-contorno" href={`mailto:${contato.email}`}>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3z M3 7l9 6 9-6" /></svg>
+                {contato.botaoEmail}
               </a>
-            </li>
-            <li>
-              <span class="contato-rotulo">E-mail</span>
-              <a class="contato-link" href={`mailto:${contato.email}`}>{contato.email}</a>
-            </li>
-            <li>
-              <span class="contato-rotulo">LinkedIn</span>
-              <a class="contato-link" href={contato.linkedin} target="_blank" rel="noopener">
-                linkedin.com/in/esther-torres-4472672b3
-              </a>
-            </li>
-          </ul>
-          <p class="contato-formato">{contato.formato}</p>
+              <button type="button" class="copiar" data-copiar={contato.email}>
+                <span data-copiar-texto>{contato.botaoCopiar}</span>
+              </button>
+            </div>
+            <a class="botao botao-contorno" href={contato.linkedin} target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h3.5v11H4z M5.75 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4z M10 9h3.4v1.6c.5-.9 1.7-1.9 3.6-1.9 3.6 0 4 2.3 4 5.3V20h-3.5v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V20H10z" /></svg>
+              {contato.botaoLinkedin}
+            </a>
+            <p class="contato-formato">{contato.formato}</p>
           </div>
         </div>
       </section>
@@ -408,7 +427,112 @@ const iconeWhats =
       {capa.botao}
     </a>
 
+    <dialog class="lupa" data-lupa aria-label="Imagem ampliada">
+      <button type="button" class="lupa-fechar" data-lupa-fechar aria-label="Fechar imagem ampliada">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
+      <img data-lupa-img alt="" />
+    </dialog>
+
     <script>
+      const reduzido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Ilustrações, barras e números ganham vida quando entram na tela.
+      const animados = document.querySelectorAll<HTMLElement>('[data-anima]');
+      const contar = (el: HTMLElement) => {
+        const final = el.dataset.conta ?? '';
+        const m = final.match(/^([\d.]+)(.*)$/);
+        if (!m || reduzido) return;
+        const alvo = Number(m[1].replace(/\./g, ''));
+        const resto = m[2];
+        const inicio = performance.now();
+        const passo = (agora: number) => {
+          const t = Math.min(1, (agora - inicio) / 1400);
+          const v = Math.round(alvo * (1 - Math.pow(1 - t, 3)));
+          el.textContent = v.toLocaleString('pt-BR') + resto;
+          if (t < 1) requestAnimationFrame(passo);
+          else el.textContent = final;
+        };
+        requestAnimationFrame(passo);
+      };
+      if ('IntersectionObserver' in window && !reduzido) {
+        document.documentElement.classList.add('anima');
+        const obs = new IntersectionObserver(
+          (entradas) =>
+            entradas.forEach((e) => {
+              if (!e.isIntersecting) return;
+              e.target.classList.add('visivel');
+              obs.unobserve(e.target);
+            }),
+          { threshold: 0.15 },
+        );
+        animados.forEach((el) => obs.observe(el));
+        const obsNum = new IntersectionObserver(
+          (entradas) =>
+            entradas.forEach((e) => {
+              if (!e.isIntersecting) return;
+              contar(e.target as HTMLElement);
+              obsNum.unobserve(e.target);
+            }),
+          { threshold: 0.6 },
+        );
+        document.querySelectorAll<HTMLElement>('[data-conta]').forEach((el) => obsNum.observe(el));
+      }
+
+      // Menu: marca a seção em que a pessoa está.
+      const links = document.querySelectorAll<HTMLAnchorElement>('[data-menu]');
+      if ('IntersectionObserver' in window) {
+        const obsMenu = new IntersectionObserver(
+          (entradas) =>
+            entradas.forEach((e) => {
+              if (!e.isIntersecting) return;
+              links.forEach((l) =>
+                l.getAttribute('href') === '#' + e.target.id
+                  ? l.setAttribute('aria-current', 'true')
+                  : l.removeAttribute('aria-current'),
+              );
+            }),
+          { rootMargin: '-45% 0px -50% 0px' },
+        );
+        links.forEach((l) => {
+          const alvo = document.querySelector(l.getAttribute('href')!);
+          if (alvo) obsMenu.observe(alvo);
+        });
+      }
+
+      // Ampliar prints numa janela, sem sair da página.
+      const lupa = document.querySelector<HTMLDialogElement>('[data-lupa]');
+      const lupaImg = document.querySelector<HTMLImageElement>('[data-lupa-img]');
+      if (lupa && lupaImg && typeof lupa.showModal === 'function') {
+        document.querySelectorAll<HTMLAnchorElement>('[data-ampliar]').forEach((a) =>
+          a.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            lupaImg.src = a.href;
+            lupaImg.alt = a.querySelector('img')?.alt ?? '';
+            lupa.showModal();
+          }),
+        );
+        document.querySelector('[data-lupa-fechar]')?.addEventListener('click', () => lupa.close());
+        lupa.addEventListener('click', (ev) => {
+          if (ev.target === lupa) lupa.close();
+        });
+      }
+
+      // Copiar e-mail.
+      document.querySelectorAll<HTMLButtonElement>('[data-copiar]').forEach((b) =>
+        b.addEventListener('click', async () => {
+          const texto = b.querySelector<HTMLElement>('[data-copiar-texto]')!;
+          const original = texto.textContent;
+          try {
+            await navigator.clipboard.writeText(b.dataset.copiar!);
+            texto.textContent = 'E-mail copiado';
+          } catch {
+            texto.textContent = b.dataset.copiar!;
+          }
+          setTimeout(() => (texto.textContent = original), 2500);
+        }),
+      );
+
       // O botão fixo some quando outro botão de WhatsApp já está na tela.
       const fixo = document.querySelector<HTMLElement>('[data-whats-fixo]');
       const principais = document.querySelectorAll('[data-whats-principal]');

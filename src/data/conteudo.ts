@@ -19,6 +19,10 @@ export const contato = {
   email: 'torresesther2809@gmail.com',
   linkedin: 'https://www.linkedin.com/in/esther-torres-4472672b3/',
   formato: 'Trabalho remoto.',
+  botaoWhatsapp: 'Conversar no WhatsApp',
+  botaoEmail: 'Mandar um e-mail',
+  botaoCopiar: 'Copiar e-mail',
+  botaoLinkedin: 'Ver meu LinkedIn',
 };
 
 export const capa = {
@@ -304,5 +308,5 @@ export const outrosProjetos = {
 
 export const rodape = {
   titulo: 'Vamos conversar?',
-  texto: 'Me chama no WhatsApp, por e-mail ou no LinkedIn.',
+  texto: 'Para vagas e projetos, o caminho mais rápido é o WhatsApp.',
 };

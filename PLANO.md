@@ -4,17 +4,18 @@ Primeira passada, antes de construir. Depois do plano, a revisão contra o brief
 
 ## Cores
 
+Versão atual: paleta oliva, a partir da referência que a Moni mandou (`#4E5E47`, `#B6C1A6`, `#D1D3C6`). A primeira versão usava um verde mais escuro e saturado, que ela achou forte.
+
 | Nome | Hex | Papel |
 | --- | --- | --- |
-| Mata fechada | `#0E2A1E` | Fundo dos blocos escuros e cor do texto nos blocos claros. É a cor que manda. |
-| Folha de bananeira | `#1B6B3E` | Verde vivo: barras "com roteiro meu", links e detalhes nos blocos claros (5,46:1 sobre capim). |
-| Capim | `#E4EFD2` | Fundo dos blocos claros. Verde bem claro, puxado para o amarelo, longe do sálvia da Dra. Gabriela Horn. |
-| Cajá | `#F4B63F` | Quente principal. Estrelas, números e botões sobre o verde escuro (8,48:1 sobre mata fechada). |
-| Urucum | `#A93514` | Quente de apoio. Só nos blocos claros: chip "Minha parte", sol atrás do retrato (5,48:1 sobre capim e 4,92:1 sobre o capim mais fundo dos cartões). |
+| Oliva | `#45543F` | Fundo dos blocos escuros. Um tom abaixo do `#4E5E47` da referência, para o cajá passar no contraste. |
+| Oliva da referência | `#4E5E47` | Títulos nos blocos claros (5,6:1) e cartões no escuro. |
+| Pedra | `#E6E8DF` | Fundo dos blocos claros. |
+| Sálvia | `#B6C1A6` | Barras dos Reels anteriores e traço das ilustrações no escuro. |
+| Cajá | `#F6C35F` | Quente principal no escuro: botões, estrelas, destaques (5:1 sobre o oliva). |
+| Urucum | `#A93514` | Quente de apoio nos blocos claros: "Minha parte", "Resultado", sol do retrato (5,3:1 sobre pedra). |
 
-Regras de contraste: cajá nunca vira texto sobre capim (1,5:1); urucum nunca vira texto sobre mata fechada (3,2:1).
-
-O sálvia da arte da Dra. Gabriela Horn fica em torno de `#7E9A68`, médio e acinzentado. O site usa os dois extremos (mata fechada, quase preta, e capim, quase branco) mais um verde saturado. Assim as artes das médicas leem como conteúdo de cliente.
+Atenção: o oliva ficou mais perto do sálvia da arte da Dra. Gabriela Horn do que a primeira versão. As artes continuam lendo como peça de cliente porque aparecem em cartões claros, com borda própria.
 
 ## Fontes
 
