@@ -26,7 +26,7 @@ const rotulo = (i: number) => (i === 0 ? 'Capa' : `Card ${i + 1}`);
           <figure class="carrossel-card" aria-roledescription="card" aria-label={`${i + 1} de ${total}`}>
             <Foto
               nome={card.imagem}
-              alt={`${rotulo(i)} do carrossel publicado da ${dono}. Texto: ${card.texto}`}
+              alt={`${rotulo(i)} do carrossel da ${dono}. Texto: ${card.texto}`}
               widths={[360, 540, 720]}
               sizes="(min-width: 960px) 380px, 82vw"
             />

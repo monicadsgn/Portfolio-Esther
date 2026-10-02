@@ -36,7 +36,7 @@ export const capa = {
   botao: 'Conversar no WhatsApp',
   /** Três números curtos, cada um leva ao caso de onde vem. */
   numeros: [
-    { valor: '4 anos', rotulo: 'como social media', link: '#onde' },
+    { valor: '3 anos', rotulo: 'como social media', link: '#onde' },
     { valor: '+5 mil', rotulo: 'visualizações num Reel com roteiro meu', link: '#rita' },
     { valor: '2.400', rotulo: 'matrículas na campanha Vitalício', link: '#revisao' },
   ],
@@ -56,7 +56,7 @@ export const ondeAtuei = {
   experiencias: [
     {
       empresa: 'V4 Company',
-      cargo: 'Redatora e conteudista',
+      cargo: 'Social media',
       tarefas: [
         'Campanhas com base em SEO',
         'Endomarketing',
@@ -67,7 +67,7 @@ export const ondeAtuei = {
     },
     {
       empresa: 'Numit',
-      cargo: 'Redatora e conteudista',
+      cargo: 'Social media',
       sobre: 'Agência de marketing para médicos.',
       tarefas: ['Planejamento do mês', 'Texto dos carrosséis', 'Roteiro de Reels', 'Vídeos de lançamento'],
     },
@@ -88,7 +88,7 @@ export const sobre = {
   titulo: 'Sobre mim',
   destaque: 'Meu forte é a escrita.',
   paragrafos: [
-    'Atuo como social media há 4 anos, em agência e em projeto independente. Uso os números pra entender o que funciona e decidir o próximo passo.',
+    'Atuo como social media há 3 anos, em agência e em projeto independente. Uso os números pra entender o que funciona e decidir o próximo passo.',
     'Gosto de nichos diferentes. Cada um me faz explorar a criatividade e aprender algo novo.',
   ],
   formacao: [
@@ -227,7 +227,7 @@ export const rita = {
   } as Carrossel,
   raciocinio: [
     'Os roteiros partem de uma pergunta que a paciente já se faz, como “Sua pele mudou na menopausa?”. Depois explicam o porquê da mudança e terminam na avaliação, não num procedimento.',
-    'O carrossel segue a mesma lógica: começa por uma sensação que a paciente reconhece, mostra como a médica avalia e só no fim chama para a consulta.',
+    'No carrossel, o cuidado é o mesmo: começar pela observação, explicar sem prometer e tratar a personalização como parte do cuidado.',
   ],
 };
 
@@ -273,39 +273,8 @@ export const horn = {
       },
     ],
   },
-  carrossel: {
-    titulo: 'Por que tanta gente fala de exossomos vegetais',
-    descricao: 'Uma tecnologia nova, apresentada sem prometer resultado.',
-    cards: [
-      {
-        imagem: 'horn-carrossel-02-09-card-1-capa.jpg',
-        texto: 'Por que tanta gente está falando sobre exossomos vegetais?',
-      },
-      {
-        imagem: 'horn-carrossel-02-09-card-2.jpg',
-        texto: 'Na medicina, algumas tecnologias surgem e desaparecem rapidamente. Outras começam a ganhar espaço porque despertam interesse da comunidade científica. Os exossomos vegetais fazem parte dessa segunda conversa.',
-      },
-      {
-        imagem: 'horn-carrossel-02-09-card-3.jpg',
-        texto: 'Eles não chegaram para substituir tudo o que já existe. O interesse está na forma como podem participar dos processos de comunicação celular e regeneração tecidual. É justamente isso que vem sendo estudado.',
-      },
-      {
-        imagem: 'horn-carrossel-02-09-card-4.jpg',
-        texto: 'Mais importante do que acompanhar uma novidade é entender quando ela realmente faz sentido. Na Dermatologia, indicação continua sendo uma decisão clínica. Não uma tendência.',
-      },
-      {
-        imagem: 'horn-carrossel-02-09-card-5.jpg',
-        texto: 'Foi esse olhar que busquei aprofundar no curso sobre exossomos vegetais. Mais do que conhecer uma tecnologia, entender onde ela pode agregar valor ao tratamento.',
-      },
-      {
-        imagem: 'horn-carrossel-02-09-card-6-final.jpg',
-        texto: 'A medicina evolui constantemente. Estudar é a forma de oferecer tratamentos cada vez mais individualizados e baseados em evidências.',
-      },
-    ],
-  } as Carrossel,
   raciocinio: [
     'Nos dois lançamentos, o vídeo abre com a queixa da paciente: o cabelo mais fino, a pele que leva dias para parar de descamar. A tecnologia só aparece depois, como parte de uma estratégia, e não como novidade.',
-    'No carrossel, o cuidado é o mesmo: explicar o que está sendo estudado sem prometer resultado e deixar a indicação como decisão clínica.',
   ],
 };
 
@@ -383,7 +352,15 @@ export const entregas = {
     },
   ],
   nichosTitulo: 'Nichos em que já trabalhei',
-  nichos: ['Saúde e dermatologia', 'Educação jurídica', 'Varejo', 'Noivas e moda festa'],
+  nichos: [
+    'Saúde e dermatologia',
+    'Educação jurídica',
+    'Educação',
+    'Varejo',
+    'Noivas e moda festa',
+    'Alimentício',
+    'Tecnologia',
+  ],
 };
 
 export const rodape = {
