@@ -37,7 +37,7 @@ export const capa = {
   /** Três números curtos, cada um leva ao caso de onde vem. */
   numeros: [
     { valor: '4 anos', rotulo: 'como social media', link: '#onde' },
-    { valor: '5.069', rotulo: 'visualizações num Reel com roteiro meu', link: '#rita' },
+    { valor: '+5 mil', rotulo: 'visualizações num Reel com roteiro meu', link: '#rita' },
     { valor: '2.400', rotulo: 'matrículas na campanha Vitalício', link: '#revisao' },
   ],
 };
@@ -70,7 +70,6 @@ export const ondeAtuei = {
       cargo: 'Redatora e conteudista',
       sobre: 'Agência de marketing para médicos.',
       tarefas: ['Planejamento do mês', 'Texto dos carrosséis', 'Roteiro de Reels', 'Vídeos de lançamento'],
-      resultado: 'Reels com roteiro meu chegaram a 5.069 visualizações.',
     },
     {
       empresa: 'C2S (Contact2Sale)',
@@ -106,7 +105,7 @@ export const sobre = {
     { curso: 'IA Generativa em Marketing', onde: 'USP', quando: '2026' },
     { curso: 'Jornalismo', onde: 'Unifacetie', quando: 'em curso' },
   ],
-  ferramentas: ['Notion', 'Jira', 'Slack', 'Google Workspace', 'Claude', 'ChatGPT', 'Gemini', 'Manus', 'NotebookLM'],
+  ferramentas: ['Notion', 'ClickUp', 'Trello', 'Ekyte', 'Jira', 'Slack', 'Google Workspace', 'Claude', 'ChatGPT', 'Gemini', 'Manus', 'NotebookLM'],
 };
 
 /** Frases da faixa em movimento entre as seções. */
@@ -117,7 +116,7 @@ export const comoTrabalho = {
   frase: 'Eu planejo o mês antes de ele começar.',
   complemento:
     'Tema, texto e roteiro ficam prontos antes. Depois olho os números pra decidir o próximo passo.',
-  prova: 'Em setembro, planejei 5 carrosséis para a Dra. Rita Leão e 7 para a Dra. Gabriela Horn.',
+  prova: 'Consigo planejar o mês de vários clientes ao mesmo tempo, com antecedência, coerência e estratégia.',
 };
 
 export type Card = { imagem: string; texto: string };
@@ -138,8 +137,8 @@ export const revisao = {
   id: 'revisao',
   nome: 'Revisão Ensino Jurídico',
   onde: 'Projeto independente',
-  gancho: 'Estratégia de conteúdo para um perfil de 190 mil seguidores.',
-  contexto: 'Perfil de preparação para procuradorias. Trabalhei direto com o perfil, sem agência.',
+  gancho: 'Estratégia de conteúdo para um perfil grande, direto com o cliente, sem agência no meio.',
+  contexto: 'Perfil de preparação para procuradorias, que já era grande quando entrei.',
   fiz: ['Estratégia de conteúdo'],
   seguidores: {
     antes: '190 mil',
@@ -171,8 +170,9 @@ export const rita = {
   id: 'rita',
   nome: 'Dra. Rita Leão',
   onde: 'Numit, dermatologia',
-  gancho: 'Dois Reels com roteiro meu chegaram a 5.069 e 3.329 visualizações.',
-  contexto: 'Os Reels anteriores do perfil tinham 349 e 518. Também participei da reformulação da linha editorial.',
+  gancho: 'Reels com roteiro meu passaram de 5 mil visualizações.',
+  contexto:
+    'Planejei o mês do perfil e, na reformulação da linha editorial, levantei com a médica as referências visuais que orientaram a arte dos primeiros posts.',
   fiz: ['Planejamento do mês', 'Texto dos carrosséis', 'Roteiro dos Reels', 'Referências para a arte'],
   reels: [
     { grupo: 'Reels anteriores', tema: 'Procedimento só porque viu', visualizacoes: 349 },
@@ -184,22 +184,22 @@ export const rita = {
     {
       imagem: 'rita-antes-reel-procedimento-so-porque-viu-insights.jpg',
       alt: 'Insights de um Reel anterior da Dra. Rita Leão sobre fazer procedimento só porque viu no Instagram de alguém: 349 visualizações.',
-      rotulo: 'Anterior: 349',
+      tipo: 'antes',
     },
     {
       imagem: 'rita-antes-reel-pele-seca-inverno-insights.jpg',
       alt: 'Insights de um Reel anterior da Dra. Rita Leão sobre pele seca no inverno: 518 visualizações.',
-      rotulo: 'Anterior: 518',
+      tipo: 'antes',
     },
     {
       imagem: 'rita-depois-reel-pele-na-menopausa-insights.jpg',
       alt: 'Insights do Reel da Dra. Rita Leão sobre pele na menopausa, com roteiro da Esther: 5.069 visualizações.',
-      rotulo: 'Com roteiro meu: 5.069',
+      tipo: 'depois',
     },
     {
       imagem: 'rita-depois-reel-melhor-resultado-insights.jpg',
       alt: 'Insights do Reel da Dra. Rita Leão sobre o melhor resultado, com roteiro da Esther: 3.329 visualizações.',
-      rotulo: 'Com roteiro meu: 3.329',
+      tipo: 'depois',
     },
   ],
   carrossel: {
@@ -229,8 +229,8 @@ export const rita = {
     ],
   } as Carrossel,
   raciocinio: [
-    'Em setembro, planejei 5 carrosséis do mês. Um deles está aberto aqui, card a card.',
-    'Na reformulação da linha editorial, levantei as referências visuais junto com a Dra. Rita Leão para orientar a arte.',
+    'Os roteiros partem de uma pergunta que a paciente já se faz, como “Sua pele mudou na menopausa?”. Depois explicam o porquê da mudança e terminam na avaliação, não num procedimento.',
+    'O carrossel segue a mesma lógica: começa por uma sensação que a paciente reconhece, mostra como a médica avalia e só no fim chama para a consulta.',
   ],
 };
 
@@ -239,7 +239,7 @@ export const horn = {
   nome: 'Dra. Gabriela Horn',
   onde: 'Numit, dermatologia',
   gancho: 'O roteiro parte da dor da paciente e coloca o diagnóstico antes do procedimento.',
-  contexto: 'Roteiros dos vídeos de lançamento do Exomine (exossomos autólogos) e do LhaLa Peel, os dois publicados.',
+  contexto: 'Roteiros dos vídeos de lançamento do Exomine (exossomos autólogos) e do LhaLa Peel.',
   fiz: ['Planejamento do mês', 'Roteiro dos vídeos'],
   carrossel: {
     titulo: 'Por que tanta gente fala de exossomos vegetais',
@@ -272,14 +272,14 @@ export const horn = {
     ],
   } as Carrossel,
   raciocinio: [
-    'Com tecnologia nova, o cuidado é não prometer resultado. O carrossel explica o que está sendo estudado e deixa a indicação como decisão clínica.',
-    'No calendário de setembro, foram 7 carrosséis planejados.',
+    'Nos dois lançamentos, o vídeo abre com a queixa da paciente: o cabelo mais fino, a pele que leva dias para parar de descamar. A tecnologia só aparece depois, como parte de uma estratégia, e não como novidade.',
+    'No carrossel, o cuidado é o mesmo: explicar o que está sendo estudado sem prometer resultado e deixar a indicação como decisão clínica.',
   ],
 };
 
 export const outrosProjetos = {
   titulo: 'Outros projetos',
-  intro: 'Dois clientes da V4 Company.',
+  intro: 'Alguns dos meus projetos na V4 Company.',
   projetos: [
     {
       nome: 'Ateliê Noiva & Cia',
@@ -315,6 +315,8 @@ export const outrosProjetos = {
 };
 
 export const rodape = {
-  titulo: 'Vamos conversar?',
-  texto: 'Para vagas e projetos, o caminho mais rápido é o WhatsApp.',
+  chamada: 'Gostou do que viu?',
+  titulo: 'Vamos planejar o seu próximo mês?',
+  texto:
+    'Estou aberta a vagas e projetos de social media e copywriting, em trabalho remoto. O caminho mais rápido é o WhatsApp.',
 };

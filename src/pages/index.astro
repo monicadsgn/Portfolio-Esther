@@ -357,7 +357,9 @@ const estrela = 'M10 0Q10 10 20 10Q10 10 10 20Q10 10 0 10Q10 10 10 0Z';
                         <a href={p.grande ?? '#'} data-ampliar aria-label={`Ampliar: ${p.alt}`}>
                           <Foto nome={p.imagem} alt={p.alt} widths={[200, 320]} sizes="(min-width: 960px) 140px, 44vw" />
                         </a>
-                        <span>{p.rotulo}</span>
+                        <span class:list={['print-tag', `print-tag-${p.tipo}`]}>
+                          {p.tipo === 'antes' ? 'Reel anterior' : 'Com roteiro meu'}
+                        </span>
                       </li>
                     ))
                   }
@@ -428,6 +430,10 @@ const estrela = 'M10 0Q10 10 20 10Q10 10 10 20Q10 10 0 10Q10 10 10 0Z';
         <Ilustracao tipo="sol" class="il-contato" paralaxe={0.1} />
         <div class="largura contato-grade">
           <div>
+            <div class="contato-retrato" data-revela="escala">
+              <Foto nome={capa.retrato} alt="" widths={[160, 240]} sizes="120px" />
+            </div>
+            <p class="contato-chamada" data-revela>{rodape.chamada}</p>
             <h2 id="contato-titulo" class="contato-titulo" data-revela="palavras">{rodape.titulo}</h2>
             <p class="contato-texto" data-revela>{rodape.texto}</p>
           </div>
@@ -451,7 +457,6 @@ const estrela = 'M10 0Q10 10 20 10Q10 10 10 20Q10 10 0 10Q10 10 10 0Z';
               </svg>
               {contato.botaoLinkedin}
             </a>
-            <p class="contato-formato" style="--i:3">{contato.formato}</p>
           </div>
         </div>
       </section>

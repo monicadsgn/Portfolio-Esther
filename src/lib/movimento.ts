@@ -21,16 +21,19 @@ function separarPalavras() {
   });
 }
 
-/** Revela textos, imagens e ilustrações quando entram na tela. */
+/** Revela textos, imagens e ilustrações quando entram na tela, também ao voltar a rolagem. */
 function revelar() {
   const obs = new IntersectionObserver(
     (entradas) =>
       entradas.forEach((e) => {
-        if (!e.isIntersecting) return;
-        e.target.classList.add('revelado', 'visivel');
-        obs.unobserve(e.target);
+        if (e.isIntersecting) {
+          e.target.classList.add('revelado', 'visivel');
+        } else if (e.boundingClientRect.top > window.innerHeight || e.boundingClientRect.bottom < 0) {
+          // Saiu totalmente da tela: prepara para animar de novo quando voltar.
+          e.target.classList.remove('revelado', 'visivel');
+        }
       }),
-    { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
+    { threshold: [0, 0.12], rootMargin: '0px 0px -6% 0px' },
   );
   document.querySelectorAll('[data-revela], [data-anima]').forEach((el) => obs.observe(el));
 }
