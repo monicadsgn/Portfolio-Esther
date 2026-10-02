@@ -47,6 +47,7 @@ const ampliar = async (nome: string) => {
 };
 const printsRita = await Promise.all(rita.prints.map(async (p) => ({ ...p, grande: await ampliar(p.imagem) })));
 const revisaoGrande = await ampliar(revisao.print.imagem);
+const hornGrande = await ampliar(horn.resultado.print.imagem);
 const projetos = await Promise.all(
   outrosProjetos.projetos.map(async (p) => ({
     ...p,
@@ -389,6 +390,22 @@ const estrela = 'M10 0Q10 10 20 10Q10 10 10 20Q10 10 0 10Q10 10 10 0Z';
               contexto={horn.contexto}
               fiz={horn.fiz}
             />
+            <div class="horn-resultado" data-revela>
+              <a class="horn-print" href={hornGrande ?? '#'} data-ampliar aria-label={`Ampliar: ${horn.resultado.print.alt}`}>
+                <Foto
+                  nome={horn.resultado.print.imagem}
+                  alt={horn.resultado.print.alt}
+                  widths={[240, 360]}
+                  sizes="(min-width: 960px) 200px, 38vw"
+                  foco={horn.resultado.print.foco}
+                />
+              </a>
+              <p class="numero">
+                <strong data-conta={horn.resultado.numero}>{horn.resultado.numero}</strong>
+                <span>{horn.resultado.rotulo}</span>
+              </p>
+            </div>
+            <Carrossel carrossel={horn.carrossel} dono={horn.nome} />
             <Roteiro roteiro={horn.roteiro} />
             <Raciocinio paragrafos={horn.raciocinio} />
           </article>

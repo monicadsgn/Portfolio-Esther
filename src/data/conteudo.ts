@@ -236,8 +236,50 @@ export const horn = {
   nome: 'Dra. Gabriela Horn',
   onde: 'Numit, dermatologia',
   gancho: 'O roteiro parte da dor da paciente e coloca o diagnóstico antes do procedimento.',
-  contexto: 'Roteiros dos vídeos de lançamento do Exomine (exossomos autólogos) e do LhaLa Peel.',
-  fiz: ['Planejamento do mês', 'Roteiro dos vídeos'],
+  contexto:
+    'Textos dos carrosséis e roteiros dos vídeos de lançamento do Exomine (exossomos autólogos) e do LhaLa Peel.',
+  fiz: ['Planejamento do mês', 'Texto dos carrosséis', 'Roteiro dos vídeos'],
+  /** Número do carrossel do cabelo, com o print dos insights ao lado. */
+  resultado: {
+    numero: '7.712',
+    rotulo: 'visualizações no carrossel “O cabelo muda ao longo da vida”',
+    print: {
+      imagem: 'horn-carrossel-cabelo-insights.jpg',
+      alt: 'Insights do carrossel da Dra. Gabriela Horn “O cabelo muda ao longo da vida”: 7.712 visualizações e 26 interações com o post.',
+      /** Altura do recorte (0 = topo, 100 = base) para o número aparecer. */
+      foco: 100,
+    },
+  },
+  carrossel: {
+    titulo: 'O cabelo muda ao longo da vida',
+    descricao: 'Escrito na voz da médica. Parte do que é natural, separa mudança de doença e leva para a avaliação.',
+    cards: [
+      {
+        imagem: 'horn-carrossel-cabelo-card-1-capa.jpg',
+        texto: 'O cabelo muda ao longo da vida. E isso faz parte da biologia dos fios.',
+      },
+      {
+        imagem: 'horn-carrossel-cabelo-card-2.jpg',
+        texto: 'Assim como a pele, o cabelo também passa por transformações naturais com o passar dos anos.',
+      },
+      {
+        imagem: 'horn-carrossel-cabelo-card-3.jpg',
+        texto: 'Os fios podem perder espessura, volume e resistência de forma gradual.',
+      },
+      {
+        imagem: 'horn-carrossel-cabelo-card-4.jpg',
+        texto: 'Nem toda mudança significa uma doença. Mas toda mudança merece ser compreendida.',
+      },
+      {
+        imagem: 'horn-carrossel-cabelo-card-5.jpg',
+        texto: 'A avaliação médica ajuda a diferenciar aquilo que faz parte do processo natural do que exige investigação.',
+      },
+      {
+        imagem: 'horn-carrossel-cabelo-card-6-final.jpg',
+        texto: 'Conhecer o comportamento dos fios também é uma forma de cuidar da saúde capilar.',
+      },
+    ],
+  } as Carrossel,
   /** Roteiro aberto, com o texto exato da Esther. */
   roteiro: {
     titulo: 'Lançamento do Exomine',
@@ -275,6 +317,8 @@ export const horn = {
   },
   raciocinio: [
     'Nos dois lançamentos, o vídeo abre com a queixa da paciente: o cabelo mais fino, a pele que leva dias para parar de descamar. A tecnologia só aparece depois, como parte de uma estratégia, e não como novidade.',
+
+    'No carrossel do cabelo, a mudança aparece primeiro como algo natural. Depois o texto separa mudança de doença e termina na avaliação médica, sem prometer tratamento.',
   ],
 };
 

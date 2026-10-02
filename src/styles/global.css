@@ -1072,6 +1072,51 @@ body::after {
   }
 }
 
+/* Número do carrossel da Dra. Gabriela Horn */
+.horn-resultado {
+  display: grid;
+  grid-template-columns: minmax(0, 9rem) 1fr;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 34rem;
+  margin-bottom: 3rem;
+}
+
+.horn-print {
+  display: block;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px -18px rgba(0, 0, 0, 0.6);
+}
+
+.horn-print img,
+.horn-print .vazio {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 739 / 900;
+  object-fit: cover;
+  transition: transform 0.4s var(--suave);
+}
+
+.horn-print:hover img {
+  transform: scale(1.04);
+}
+
+.horn-resultado strong {
+  color: var(--caja);
+}
+
+.horn-resultado .numero span {
+  color: var(--apoio-escuro);
+}
+
+@media (min-width: 640px) {
+  .horn-resultado {
+    grid-template-columns: 11rem 1fr;
+    gap: 2rem;
+  }
+}
+
 /* Reels da Dra. Rita Leão */
 .rita-prova {
   display: grid;
