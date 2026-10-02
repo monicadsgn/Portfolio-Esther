@@ -35,6 +35,12 @@ export const capa = {
   retratoAlt:
     'Retrato da Esther Torres: cabelo preto, longo e cacheado, blusa preta, sorriso leve, olhando para a câmera.',
   botao: 'Conversar no WhatsApp',
+  /** Três números curtos, cada um leva ao caso de onde vem. */
+  numeros: [
+    { valor: '4 anos', rotulo: 'como social media', link: '#onde' },
+    { valor: '5.069', rotulo: 'visualizações num Reel com roteiro meu', link: '#rita' },
+    { valor: '2.400', rotulo: 'matrículas na campanha Vitalício', link: '#revisao' },
+  ],
 };
 
 export type Experiencia = {
@@ -56,6 +62,7 @@ export const ondeAtuei = {
     },
     {
       empresa: 'Numit',
+      cargo: 'Redatora e conteudista',
       sobre: 'Agência especializada em marketing para médicos.',
       texto:
         'Cuidava do planejamento do mês de perfis de médicas: tema, texto dos carrosséis e roteiro dos Reels e dos vídeos de lançamento, sempre na voz de cada médica.',

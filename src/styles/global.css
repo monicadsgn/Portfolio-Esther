@@ -1,20 +1,20 @@
 /* Paleta: verde manda, quente é acento. Ver PLANO.md. */
 :root {
-  /* Paleta oliva, a partir da referência da Moni (#4E5E47, #B6C1A6, #D1D3C6) */
-  --mata: #45543f; /* oliva: fundo dos blocos escuros */
-  --mata-2: #4e5e47; /* oliva da referência: ladrilhos e cartões no escuro */
-  --mata-3: #5c6d54; /* linhas no escuro */
-  --bananeira: #4e5e47; /* títulos nos blocos claros (5,6:1) */
-  --capim: #e6e8df; /* pedra clara: fundo dos blocos claros */
-  --capim-2: #dce0d2; /* cartões nos blocos claros */
-  --salvia: #b6c1a6;
-  --caja: #f6c35f; /* 5:1 sobre o oliva */
+  /* Verde mata atlântica: médio, puxado pro azul, longe do sálvia amarelado da Dra. Gabriela Horn */
+  --mata: #2a5f4c; /* fundo dos blocos escuros */
+  --mata-2: #326b57; /* ladrilhos e cartões no escuro */
+  --mata-3: #417a65; /* linhas no escuro */
+  --bananeira: #2a5f4c; /* títulos nos blocos claros (6,5:1) */
+  --capim: #eef1e8; /* fundo dos blocos claros */
+  --capim-2: #e0e8dd; /* cartões nos blocos claros */
+  --salvia: #b9d3c3; /* traço das ilustrações e barras no escuro */
+  --caja: #f6c35f; /* 4,5:1 sobre o verde */
   --urucum: #a93514;
 
-  --texto-escuro: #2b3527;
-  --texto-claro: #eef0e6;
-  --apoio-escuro: #cdd4c1;
-  --apoio-claro: #4f5d48;
+  --texto-escuro: #1f3a2f;
+  --texto-claro: #f2f4ee;
+  --apoio-escuro: #cfe2d6;
+  --apoio-claro: #456155;
 
   --titulo: 'Marcellus', 'Optima', 'Candara', Georgia, serif;
   --corpo: 'Hanken Grotesk Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -1613,7 +1613,6 @@ a {
 
 .botao-contorno:hover {
   background: var(--mata-2);
-  color: var(--caja);
   transform: translateY(-2px);
 }
 
@@ -1666,7 +1665,7 @@ a[data-ampliar] {
 }
 
 .lupa::backdrop {
-  background: rgba(30, 38, 27, 0.82);
+  background: rgba(16, 38, 30, 0.85);
 }
 
 .lupa img {
@@ -1697,4 +1696,46 @@ a[data-ampliar] {
   stroke: currentColor;
   stroke-width: 2.2;
   stroke-linecap: round;
+}
+
+/* Três números na capa, cada um leva ao seu caso */
+.capa-numeros {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 32rem;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--mata-3);
+}
+
+.capa-numeros a {
+  display: block;
+  text-decoration: none;
+  color: var(--apoio-escuro);
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.capa-numeros strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-family: var(--titulo);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 6vw, 2.1rem);
+  line-height: 1;
+  color: var(--caja);
+  font-variant-numeric: lining-nums;
+}
+
+.capa-numeros a:hover span {
+  color: var(--texto-claro);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .capa-numeros {
+    animation: aparece 0.9s ease both 0.7s;
+  }
 }

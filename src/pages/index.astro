@@ -60,7 +60,7 @@ const iconeWhats =
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{site.titulo}</title>
     <meta name="description" content={site.descricao} />
-    <meta name="theme-color" content="#45543F" />
+    <meta name="theme-color" content="#2A5F4C" />
     <link rel="canonical" href={site.url + '/'} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
@@ -109,6 +109,18 @@ const iconeWhats =
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d={iconeWhats} /></svg>
             {capa.botao}
           </a>
+          <ul class="capa-numeros">
+            {
+              capa.numeros.map((n) => (
+                <li>
+                  <a href={n.link}>
+                    <strong>{n.valor}</strong>
+                    <span>{n.rotulo}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
         </div>
         <div class="capa-retrato">
           <svg class="capa-astros" viewBox="0 0 400 480" aria-hidden="true" focusable="false">

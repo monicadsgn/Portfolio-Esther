@@ -4,18 +4,17 @@ Primeira passada, antes de construir. Depois do plano, a revisão contra o brief
 
 ## Cores
 
-Versão atual: paleta oliva, a partir da referência que a Moni mandou (`#4E5E47`, `#B6C1A6`, `#D1D3C6`). A primeira versão usava um verde mais escuro e saturado, que ela achou forte.
+Versão atual: verde mata atlântica. Médio e puxado para o azul (matiz 158°), para não se confundir com o sálvia amarelado e acinzentado da arte da Dra. Gabriela Horn (matiz 94°). Mais claro que o primeiro teste (`#0E2A1E`) e mais vivo que o oliva (`#45543F`), os dois descartados pela Moni.
 
 | Nome | Hex | Papel |
 | --- | --- | --- |
-| Oliva | `#45543F` | Fundo dos blocos escuros. Um tom abaixo do `#4E5E47` da referência, para o cajá passar no contraste. |
-| Oliva da referência | `#4E5E47` | Títulos nos blocos claros (5,6:1) e cartões no escuro. |
-| Pedra | `#E6E8DF` | Fundo dos blocos claros. |
-| Sálvia | `#B6C1A6` | Barras dos Reels anteriores e traço das ilustrações no escuro. |
-| Cajá | `#F6C35F` | Quente principal no escuro: botões, estrelas, destaques (5:1 sobre o oliva). |
-| Urucum | `#A93514` | Quente de apoio nos blocos claros: "Minha parte", "Resultado", sol do retrato (5,3:1 sobre pedra). |
-
-Atenção: o oliva ficou mais perto do sálvia da arte da Dra. Gabriela Horn do que a primeira versão. As artes continuam lendo como peça de cliente porque aparecem em cartões claros, com borda própria.
+| Mata atlântica | `#2A5F4C` | Fundo dos blocos escuros e títulos nos blocos claros (6,5:1 sobre o claro). |
+| Mata clara | `#326B57` | Ladrilhos do calendário e cartões no escuro. |
+| Névoa | `#EEF1E8` | Fundo dos blocos claros. |
+| Névoa funda | `#E0E8DD` | Cartões nos blocos claros. |
+| Hortelã | `#B9D3C3` | Traço das ilustrações e barras dos Reels anteriores no escuro. |
+| Cajá | `#F6C35F` | Quente principal no escuro: botões, números da capa, estrelas (4,5:1). |
+| Urucum | `#A93514` | Quente de apoio no claro: "Minha parte", "Resultado", sol do retrato (5,2:1). |
 
 ## Fontes
 
