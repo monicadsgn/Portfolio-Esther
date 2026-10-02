@@ -26,6 +26,9 @@ import {
   rodape,
 } from '../data/conteudo';
 
+// Endereço oficial: definido em astro.config.mjs (na Vercel, vem do domínio de produção).
+const base = (Astro.site?.toString() ?? '').replace(/\/$/, '');
+
 const whatsapp = `https://wa.me/${contato.whatsappNumero}?text=${encodeURIComponent(contato.whatsappMensagem)}`;
 const maiorReel = Math.max(...rita.reels.map((r) => r.visualizacoes));
 const numero = (n: number) => n.toLocaleString('pt-BR');
@@ -61,7 +64,7 @@ const iconeWhats =
     <title>{site.titulo}</title>
     <meta name="description" content={site.descricao} />
     <meta name="theme-color" content="#2A5F4C" />
-    <link rel="canonical" href={site.url + '/'} />
+    <link rel="canonical" href={base + '/'} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -69,8 +72,8 @@ const iconeWhats =
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:title" content={site.titulo} />
     <meta property="og:description" content={site.descricao} />
-    <meta property="og:url" content={site.url + '/'} />
-    <meta property="og:image" content={site.url + '/og.png'} />
+    <meta property="og:url" content={base + '/'} />
+    <meta property="og:image" content={base + '/og.png'} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Esther Torres, social media e copywriting." />

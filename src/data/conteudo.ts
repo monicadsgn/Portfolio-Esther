@@ -9,7 +9,6 @@ export const site = {
   titulo: 'Esther Torres | Social media e copywriting',
   descricao:
     'Portfólio da Esther Torres, social media e copywriter. Marketing de conteúdo, SEO e redação publicitária. Planejo o mês antes de ele começar e escrevo o que vira resultado.',
-  url: 'https://esther-torres.vercel.app',
 };
 
 export const contato = {
