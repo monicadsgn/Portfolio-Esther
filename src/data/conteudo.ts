@@ -44,9 +44,10 @@ export const capa = {
 
 export type Experiencia = {
   empresa: string;
-  cargo?: string;
+  cargo: string;
   sobre?: string;
-  texto: string;
+  /** O que ela fazia, em etiquetas curtas. */
+  tarefas: string[];
   resultado?: string;
 };
 
@@ -56,56 +57,60 @@ export const ondeAtuei = {
     {
       empresa: 'V4 Company',
       cargo: 'Redatora e conteudista',
-      texto:
-        'Planejei e executei campanhas e ações de comunicação, externas e internas (endomarketing), com base em SEO. Escrevi copys persuasivas para diversos canais e newsletters para clientes e colaboradores. Nas contas de varejo, entregava o calendário e os textos prontos pra designer.',
+      tarefas: [
+        'Campanhas com base em SEO',
+        'Endomarketing',
+        'Copy para diversos canais',
+        'Newsletters',
+        'Calendário e textos pra designer',
+      ],
     },
     {
       empresa: 'Numit',
       cargo: 'Redatora e conteudista',
-      sobre: 'Agência especializada em marketing para médicos.',
-      texto:
-        'Cuidava do planejamento do mês de perfis de médicas: tema, texto dos carrosséis e roteiro dos Reels e dos vídeos de lançamento, sempre na voz de cada médica.',
-      resultado:
-        'Em um dos perfis, os Reels com roteiro meu chegaram a 5.069 e 3.329 visualizações. Os anteriores tinham 349 e 518.',
-    },
-    {
-      empresa: 'Por conta própria',
-      sobre: 'Sem agência, direto com o perfil.',
-      texto: 'Estratégia de conteúdo de um perfil grande de preparação para procuradorias.',
-      resultado:
-        'O perfil foi de 190 mil para 197 mil seguidores em 4 meses. Na campanha Vitalício deste ano, foram 2.400 matrículas.',
+      sobre: 'Agência de marketing para médicos.',
+      tarefas: ['Planejamento do mês', 'Texto dos carrosséis', 'Roteiro de Reels', 'Vídeos de lançamento'],
+      resultado: 'Reels com roteiro meu chegaram a 5.069 visualizações.',
     },
     {
       empresa: 'C2S (Contact2Sale)',
       cargo: 'Copywriter e growth marketing',
-      texto:
-        'Escrevi textos para diferentes canais, com foco em conversão e engajamento. Apoiei ações de branding e mídia para fortalecer o reconhecimento da marca, implementei estratégias de growth marketing para expandir a base de clientes e fiz UX writing em landing pages e interfaces.',
+      tarefas: ['Copy para conversão', 'Growth marketing', 'Branding e mídia', 'UX writing em landing pages'],
     },
     {
       empresa: 'BSN Tec',
       cargo: 'Redatora e conteudista',
-      texto:
-        'Desenvolvi e implementei ações de comunicação em diversos canais, com foco em SEO. Apoiei a implantação da marca e o branding, e fiz UX writing em interfaces.',
+      tarefas: ['Comunicação com foco em SEO', 'Implantação da marca', 'UX writing em interfaces'],
     },
   ] as Experiencia[],
 };
 
 export const sobre = {
   titulo: 'Sobre mim',
+  destaque: 'Meu forte é a escrita.',
   paragrafos: [
-    'Atuo como social media há 4 anos, em agência e por conta própria.',
-    'Meu forte é a escrita: copywriting, criação de pautas e planejamento de conteúdo. Também trabalho com marketing de conteúdo, SEO, redação publicitária e UX writing.',
-    'Trabalho com base em dados e performance. Uso os resultados pra entender o que funciona, ajustar a comunicação e orientar as próximas decisões.',
-    'Gosto de trabalhar com nichos diferentes. Cada um me faz explorar a criatividade e aprender algo novo.',
+    'Atuo como social media há 4 anos, em agência e em projeto independente. Uso os números pra entender o que funciona e decidir o próximo passo.',
+    'Gosto de nichos diferentes. Cada um me faz explorar a criatividade e aprender algo novo.',
+  ],
+  habilidades: [
+    'Copywriting',
+    'Criação de pautas',
+    'Planejamento de conteúdo',
+    'Marketing de conteúdo',
+    'SEO',
+    'Redação publicitária',
+    'UX writing',
   ],
   formacao: [
     { curso: 'Comunicação e Marketing', onde: 'Anhanguera', quando: '2024' },
-    { curso: 'Inteligência Artificial Generativa em Marketing', onde: 'USP', quando: '2026' },
-    { curso: 'Jornalismo', onde: 'Unifacetie', quando: 'em curso, 2026' },
+    { curso: 'IA Generativa em Marketing', onde: 'USP', quando: '2026' },
+    { curso: 'Jornalismo', onde: 'Unifacetie', quando: 'em curso' },
   ],
-  ferramentas: ['Notion', 'Jira', 'Slack', 'Google Workspace'],
-  ferramentasIA: ['Claude', 'ChatGPT', 'Gemini', 'Manus', 'NotebookLM'],
+  ferramentas: ['Notion', 'Jira', 'Slack', 'Google Workspace', 'Claude', 'ChatGPT', 'Gemini', 'Manus', 'NotebookLM'],
 };
+
+/** Frases da faixa em movimento entre as seções. */
+export const metodo = ['planejo o mês', 'escrevo o texto', 'roteirizo o vídeo', 'leio os números', 'ajusto a rota'];
 
 export const comoTrabalho = {
   titulo: 'Como eu trabalho',
@@ -132,8 +137,10 @@ export const destaques = {
 export const revisao = {
   id: 'revisao',
   nome: 'Revisão Ensino Jurídico',
-  contexto: 'Por conta própria, num perfil grande de preparação para procuradorias.',
-  minhaParte: 'a estratégia de conteúdo.',
+  onde: 'Projeto independente',
+  gancho: 'Estratégia de conteúdo para um perfil de 190 mil seguidores.',
+  contexto: 'Perfil de preparação para procuradorias. Trabalhei direto com o perfil, sem agência.',
+  fiz: ['Estratégia de conteúdo'],
   seguidores: {
     antes: '190 mil',
     antesRotulo: 'seguidores quando entrei',
@@ -144,7 +151,7 @@ export const revisao = {
     numero: '2.400',
     rotulo: 'matrículas na campanha Vitalício deste ano',
     explicacao:
-      'O Vitalício é um curso que reúne todos os cursos para concursos da carreira de procuradoria, com acesso vitalício ao que já existe e ao que ainda vai ser feito.',
+      'O Vitalício reúne todos os cursos para concursos da carreira de procuradoria, com acesso vitalício ao que já existe e ao que ainda vai ser feito.',
   },
   nota: 'Números informados por mim, do período em que atuei no perfil.',
   print: {
@@ -152,10 +159,6 @@ export const revisao = {
     alt: 'Print do topo do perfil Revisão Ensino Jurídico no Instagram, com 9.351 posts, 197 mil seguidores e 297 seguindo.',
     legenda: 'O perfil hoje: 197 mil seguidores.',
   },
-  raciocinio: [
-    'O perfil já era grande quando entrei, com 190 mil seguidores. Sem agência no meio, minha parte foi a estratégia de conteúdo.',
-    'Em 4 meses, chegou a 197 mil. Na mesma época, a campanha do Vitalício somou 2.400 matrículas.',
-  ],
   /**
    * Opcional. Só aparece no site quando preenchido.
    * Preencha se a página do Revisão estiver no ar, por exemplo:
@@ -167,9 +170,10 @@ export const revisao = {
 export const rita = {
   id: 'rita',
   nome: 'Dra. Rita Leão',
-  agencia: 'Numit',
-  minhaParte: 'planejamento do mês, texto dos carrosséis, roteiro dos Reels e as referências que orientaram a arte.',
-  resumo: 'Dois Reels com roteiro meu chegaram a 5.069 e 3.329 visualizações. Os Reels anteriores tinham 349 e 518.',
+  onde: 'Numit, dermatologia',
+  gancho: 'Dois Reels com roteiro meu chegaram a 5.069 e 3.329 visualizações.',
+  contexto: 'Os Reels anteriores do perfil tinham 349 e 518. Também participei da reformulação da linha editorial.',
+  fiz: ['Planejamento do mês', 'Texto dos carrosséis', 'Roteiro dos Reels', 'Referências para a arte'],
   reels: [
     { grupo: 'Reels anteriores', tema: 'Procedimento só porque viu', visualizacoes: 349 },
     { grupo: 'Reels anteriores', tema: 'Pele seca no inverno', visualizacoes: 518 },
@@ -200,7 +204,7 @@ export const rita = {
   ],
   carrossel: {
     titulo: 'O envelhecimento que aparece antes das rugas',
-    descricao: 'Carrossel publicado, escrito na voz da médica. A capa fisga, os cards explicam e o último leva para a consulta.',
+    descricao: 'Escrito na voz da médica. A capa fisga, os cards explicam e o último leva para a consulta.',
     cards: [
       {
         imagem: 'rita-carrossel-02-09-card-1-capa.jpg',
@@ -225,21 +229,21 @@ export const rita = {
     ],
   } as Carrossel,
   raciocinio: [
-    'Em setembro, planejei 5 carrosséis do mês. Um deles está aberto aqui em cima, card a card.',
-    'Participei da reformulação da linha editorial: levantei as referências visuais junto com a Dra. Rita Leão para orientar a arte.',
+    'Em setembro, planejei 5 carrosséis do mês. Um deles está aberto aqui, card a card.',
+    'Na reformulação da linha editorial, levantei as referências visuais junto com a Dra. Rita Leão para orientar a arte.',
   ],
 };
 
 export const horn = {
   id: 'horn',
   nome: 'Dra. Gabriela Horn',
-  agencia: 'Numit',
-  minhaParte: 'planejamento do mês e roteiro dos vídeos.',
-  resumo: 'Roteiros de vídeo dos lançamentos Exomine (exossomos autólogos) e LhaLa Peel, ambos publicados.',
-  logica: 'O roteiro parte da dor da paciente e coloca o diagnóstico antes do procedimento.',
+  onde: 'Numit, dermatologia',
+  gancho: 'O roteiro parte da dor da paciente e coloca o diagnóstico antes do procedimento.',
+  contexto: 'Roteiros dos vídeos de lançamento do Exomine (exossomos autólogos) e do LhaLa Peel, os dois publicados.',
+  fiz: ['Planejamento do mês', 'Roteiro dos vídeos'],
   carrossel: {
     titulo: 'Por que tanta gente fala de exossomos vegetais',
-    descricao: 'Carrossel publicado. Apresenta uma tecnologia nova sem prometer resultado.',
+    descricao: 'Uma tecnologia nova, apresentada sem prometer resultado.',
     cards: [
       {
         imagem: 'horn-carrossel-02-09-card-1-capa.jpg',
@@ -268,7 +272,6 @@ export const horn = {
     ],
   } as Carrossel,
   raciocinio: [
-    'Nos roteiros dos lançamentos, a paciente se reconhece primeiro na queixa. Depois vem o diagnóstico, e só então o procedimento.',
     'Com tecnologia nova, o cuidado é não prometer resultado. O carrossel explica o que está sendo estudado e deixa a indicação como decisão clínica.',
     'No calendário de setembro, foram 7 carrosséis planejados.',
   ],
@@ -276,14 +279,14 @@ export const horn = {
 
 export const outrosProjetos = {
   titulo: 'Outros projetos',
-  intro: 'Na V4 Company.',
+  intro: 'Dois clientes da V4 Company.',
   projetos: [
     {
       nome: 'Ateliê Noiva & Cia',
-      tipo: 'Ateliê de noivas, formandas e padrinhos.',
-      texto:
-        'O desafio era mostrar sofisticação e qualidade sem parecer algo intocável e caro. O foco do ateliê era realizar sonhos, não ser o mais premium da cidade. Identifiquei o público específico e levei esse equilíbrio pros conteúdos e pra comunicação.',
-      minhaParte: 'calendário, textos e direção visual em parceria com a designer.',
+      tipo: 'Ateliê de noivas, formandas e padrinhos',
+      desafio: 'Mostrar sofisticação sem parecer intocável e caro.',
+      texto: 'O foco do ateliê era realizar sonhos, não ser o mais premium da cidade. Levei esse equilíbrio pros conteúdos.',
+      fiz: ['Calendário', 'Textos', 'Direção visual com a designer'],
       feed: {
         imagem: 'atelie-feed-instagram.jpg',
         alt: 'Print do feed do Instagram do Ateliê Noiva & Cia, com posts de vestidos de noiva, formandas e trajes de padrinho.',
@@ -295,11 +298,10 @@ export const outrosProjetos = {
     },
     {
       nome: 'Trajeton Magazine',
-      tipo: 'Loja de varejo.',
-      texto:
-        'Mesma rotina do Ateliê, com calendário e textos prontos pra designer. Campanha de volta às aulas com o tema organização e começo de semestre, cada post com um ângulo diferente, mais o comunicado do novo horário de sábado.',
-      minhaParte:
-        'calendário, textos, direção visual em parceria com a designer, programação e acompanhamento das postagens.',
+      tipo: 'Loja de varejo',
+      desafio: 'Uma campanha de volta às aulas com um tema só.',
+      texto: 'Organização e começo de semestre, cada post com um ângulo diferente. Mais o comunicado do novo horário de sábado.',
+      fiz: ['Calendário', 'Textos', 'Direção visual com a designer', 'Programação', 'Acompanhamento'],
       feed: {
         imagem: 'trajeton-feed-volta-as-aulas.jpg',
         alt: 'Print do feed do Instagram da Trajeton Magazine com a campanha de volta às aulas e o comunicado do novo horário de sábado.',

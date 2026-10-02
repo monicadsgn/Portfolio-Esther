@@ -1,14 +1,15 @@
 ---
 interface Props {
   paragrafos: string[];
+  rotulo?: string;
 }
-const { paragrafos } = Astro.props;
+const { paragrafos, rotulo = 'Ver o raciocínio' } = Astro.props;
 ---
 
 <details class="raciocinio">
   <summary>
-    <span class="raciocinio-abrir">Ver o raciocínio</span>
-    <span class="raciocinio-fechar">Fechar o raciocínio</span>
+    <span class="raciocinio-abrir">{rotulo}</span>
+    <span class="raciocinio-fechar">Fechar</span>
     <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>
   </summary>
   <div class="raciocinio-corpo">

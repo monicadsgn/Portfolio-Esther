@@ -13,13 +13,13 @@ const rotulo = (i: number) => (i === 0 ? 'Capa' : `Card ${i + 1}`);
 ---
 
 <div class="carrossel" data-carrossel>
-  <div class="carrossel-palco">
+  <div class="carrossel-palco" data-revela="escala">
     <div
       class="carrossel-trilho"
       tabindex="0"
       role="region"
       aria-roledescription="carrossel"
-      aria-label={`${carrossel.titulo} da ${dono}. Use as setas do teclado para passar os cards.`}
+      aria-label={`${carrossel.titulo}, carrossel da ${dono}. Use as setas do teclado para passar os cards.`}
     >
       {
         carrossel.cards.map((card, i) => (
@@ -28,40 +28,61 @@ const rotulo = (i: number) => (i === 0 ? 'Capa' : `Card ${i + 1}`);
               nome={card.imagem}
               alt={`${rotulo(i)} do carrossel publicado da ${dono}. Texto: ${card.texto}`}
               widths={[360, 540, 720]}
-              sizes="(min-width: 960px) 400px, 82vw"
+              sizes="(min-width: 960px) 380px, 82vw"
             />
           </figure>
         ))
       }
     </div>
-    <div class="carrossel-controles">
-      <button type="button" class="carrossel-seta" data-anterior aria-label="Card anterior">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
-      </button>
-      <p class="carrossel-contador" aria-live="polite">
-        <span data-atual>1</span> de {total}
-      </p>
-      <button type="button" class="carrossel-seta" data-proximo aria-label="Próximo card">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
-      </button>
-    </div>
   </div>
 
   <div class="carrossel-lado">
-    <p class="carrossel-titulo">{carrossel.titulo}</p>
-    <p class="carrossel-descricao">{carrossel.descricao}</p>
-    <ol class="carrossel-texto">
-      {
-        carrossel.cards.map((card, i) => (
-          <li aria-current={i === 0 ? 'true' : undefined}>
-            <button type="button" data-ir={i}>
-              <span class="carrossel-rotulo">{rotulo(i)}</span>
-              <span class="carrossel-frase">{card.texto}</span>
-            </button>
-          </li>
-        ))
-      }
-    </ol>
+    <p class="carrossel-rotulo-topo" data-revela>Carrossel publicado</p>
+    <h4 class="carrossel-titulo" data-revela>{carrossel.titulo}</h4>
+    <p class="carrossel-descricao" data-revela>{carrossel.descricao}</p>
+
+    <div class="carrossel-leitura" aria-hidden="true">
+      <p class="carrossel-leitura-rotulo" data-rotulo-atual>{rotulo(0)}</p>
+      <p class="carrossel-leitura-texto" data-texto-atual>{carrossel.cards[0].texto}</p>
+    </div>
+
+    <div class="carrossel-controles">
+      <button type="button" class="carrossel-seta" data-anterior aria-label="Card anterior">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>
+      </button>
+      <ol class="carrossel-pontos" aria-label="Escolher card">
+        {
+          carrossel.cards.map((_, i) => (
+            <li>
+              <button
+                type="button"
+                data-ir={i}
+                aria-label={`${rotulo(i)}, ${i + 1} de ${total}`}
+                aria-current={i === 0 ? 'true' : undefined}
+              />
+            </li>
+          ))
+        }
+      </ol>
+      <button type="button" class="carrossel-seta" data-proximo aria-label="Próximo card">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg>
+      </button>
+      <p class="carrossel-contador" aria-live="polite"><span data-atual>1</span> de {total}</p>
+    </div>
+
+    <details class="carrossel-inteiro">
+      <summary>Ler o carrossel inteiro</summary>
+      <ol>
+        {
+          carrossel.cards.map((card, i) => (
+            <li>
+              <strong>{rotulo(i)}</strong> {card.texto}
+            </li>
+          ))
+        }
+      </ol>
+    </details>
+
     {
       carrossel.link && (
         <a class="carrossel-link" href={carrossel.link} target="_blank" rel="noopener">
@@ -70,6 +91,8 @@ const rotulo = (i: number) => (i === 0 ? 'Capa' : `Card ${i + 1}`);
       )
     }
   </div>
+
+  <script is:inline type="application/json" data-textos set:html={JSON.stringify(carrossel.cards.map((c) => c.texto))} />
 </div>
 
 <script>
@@ -78,21 +101,28 @@ const rotulo = (i: number) => (i === 0 ? 'Capa' : `Card ${i + 1}`);
   document.querySelectorAll<HTMLElement>('[data-carrossel]').forEach((raiz) => {
     const trilho = raiz.querySelector<HTMLElement>('.carrossel-trilho')!;
     const cards = Array.from(raiz.querySelectorAll<HTMLElement>('.carrossel-card'));
-    const itens = Array.from(raiz.querySelectorAll<HTMLLIElement>('.carrossel-texto li'));
+    const pontos = Array.from(raiz.querySelectorAll<HTMLButtonElement>('[data-ir]'));
     const atual = raiz.querySelector<HTMLElement>('[data-atual]')!;
     const anterior = raiz.querySelector<HTMLButtonElement>('[data-anterior]')!;
     const proximo = raiz.querySelector<HTMLButtonElement>('[data-proximo]')!;
+    const leitura = raiz.querySelector<HTMLElement>('.carrossel-leitura')!;
+    const texto = raiz.querySelector<HTMLElement>('[data-texto-atual]')!;
+    const rotulo = raiz.querySelector<HTMLElement>('[data-rotulo-atual]')!;
+    const textos: string[] = JSON.parse(raiz.querySelector('[data-textos]')!.textContent || '[]');
     let indice = 0;
 
     const marcar = (i: number) => {
+      if (i === indice && texto.textContent === textos[i]) return;
       indice = i;
       atual.textContent = String(i + 1);
       anterior.disabled = i === 0;
       proximo.disabled = i === cards.length - 1;
-      itens.forEach((li, j) => {
-        if (j === i) li.setAttribute('aria-current', 'true');
-        else li.removeAttribute('aria-current');
-      });
+      pontos.forEach((p, j) => (j === i ? p.setAttribute('aria-current', 'true') : p.removeAttribute('aria-current')));
+      leitura.classList.remove('troca');
+      void leitura.offsetWidth;
+      leitura.classList.add('troca');
+      rotulo.textContent = i === 0 ? 'Capa' : `Card ${i + 1}`;
+      texto.textContent = textos[i];
     };
 
     const ir = (i: number) => {
@@ -116,9 +146,7 @@ const rotulo = (i: number) => (i === 0 ? 'Capa' : `Card ${i + 1}`);
 
     anterior.addEventListener('click', () => ir(indice - 1));
     proximo.addEventListener('click', () => ir(indice + 1));
-    raiz.querySelectorAll<HTMLButtonElement>('[data-ir]').forEach((b) =>
-      b.addEventListener('click', () => ir(Number(b.dataset.ir))),
-    );
+    pontos.forEach((b) => b.addEventListener('click', () => ir(Number(b.dataset.ir))));
     trilho.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') {
         e.preventDefault();
@@ -129,6 +157,6 @@ const rotulo = (i: number) => (i === 0 ? 'Capa' : `Card ${i + 1}`);
       }
     });
 
-    marcar(0);
+    anterior.disabled = true;
   });
 </script>

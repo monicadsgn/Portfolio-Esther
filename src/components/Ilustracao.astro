@@ -7,9 +7,11 @@ interface Props {
   tipo: Tipo;
   class?: string;
   balanca?: boolean;
+  /** Quanto a ilustração se desloca com a rolagem (negativo sobe, positivo desce). */
+  paralaxe?: number;
 }
 
-const { tipo, class: classe, balanca = false } = Astro.props;
+const { tipo, class: classe, balanca = false, paralaxe } = Astro.props;
 const r = (n: number) => Math.round(n * 10) / 10;
 
 let viewBox = '0 0 200 200';
@@ -98,6 +100,7 @@ if (tipo === 'flor') {
   aria-hidden="true"
   focusable="false"
   data-anima
+  data-paralaxe={paralaxe}
 >
   {tracos.map((d) => <path d={d} pathLength="1" />)}
   {circulos.map((c) => <circle cx={c.cx} cy={c.cy} r={c.r} pathLength="1" />)}

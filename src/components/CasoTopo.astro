@@ -1,0 +1,23 @@
+---
+import Etiquetas from './Etiquetas.astro';
+
+interface Props {
+  id: string;
+  nome: string;
+  onde: string;
+  gancho: string;
+  contexto: string;
+  fiz: string[];
+}
+const { id, nome, onde, gancho, contexto, fiz } = Astro.props;
+---
+
+<header class="caso-topo">
+  <p class="caso-onde" data-revela>{onde}</p>
+  <h3 id={`${id}-nome`} class="caso-nome" data-revela="palavras">{nome}</h3>
+  <p class="caso-gancho" data-revela="palavras">{gancho}</p>
+  <div class="caso-sub">
+    <p class="caso-contexto" data-revela>{contexto}</p>
+    <Etiquetas itens={fiz} />
+  </div>
+</header>

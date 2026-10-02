@@ -5,11 +5,13 @@ import '../styles/global.css';
 import { getImage } from 'astro:assets';
 
 import Foto from '../components/Foto.astro';
-import MinhaParte from '../components/MinhaParte.astro';
 import Raciocinio from '../components/Raciocinio.astro';
 import Carrossel from '../components/Carrossel.astro';
 import CeuDoMes from '../components/CeuDoMes.astro';
 import Ilustracao from '../components/Ilustracao.astro';
+import CasoTopo from '../components/CasoTopo.astro';
+import Etiquetas from '../components/Etiquetas.astro';
+import Faixa from '../components/Faixa.astro';
 import { imagem } from '../lib/assets';
 import {
   site,
@@ -17,6 +19,7 @@ import {
   capa,
   ondeAtuei,
   sobre,
+  metodo,
   comoTrabalho,
   destaques,
   revisao,
@@ -26,7 +29,7 @@ import {
   rodape,
 } from '../data/conteudo';
 
-// Endereço oficial: definido em astro.config.mjs (na Vercel, vem do domínio de produção).
+// Endereço oficial: definido em astro.config.mjs.
 const base = (Astro.site?.toString() ?? '').replace(/\/$/, '');
 
 const whatsapp = `https://wa.me/${contato.whatsappNumero}?text=${encodeURIComponent(contato.whatsappMensagem)}`;
@@ -34,7 +37,7 @@ const maiorReel = Math.max(...rita.reels.map((r) => r.visualizacoes));
 const numero = (n: number) => n.toLocaleString('pt-BR');
 const gruposReels = [...new Set(rita.reels.map((r) => r.grupo))];
 
-// Versão ampliada dos prints, para abrir ao tocar.
+// Versão ampliada das imagens, para abrir na janela de ampliar.
 const ampliar = async (nome: string) => {
   const src = imagem(nome);
   return src ? (await getImage({ src, width: Math.min(src.width, 900), format: 'webp' })).src : undefined;
@@ -49,11 +52,9 @@ const projetos = await Promise.all(
   })),
 );
 
-const lista = (itens: string[]) =>
-  itens.length > 1 ? `${itens.slice(0, -1).join(', ')} e ${itens[itens.length - 1]}` : itens.join('');
-
 const iconeWhats =
   'M12 2.2a9.7 9.7 0 0 0-8.3 14.8L2.4 21.8l4.9-1.3A9.7 9.7 0 1 0 12 2.2Zm0 17.7a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 19.9Zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8.9c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.2-.2-.5-.3Z';
+const estrela = 'M10 0Q10 10 20 10Q10 10 10 20Q10 10 0 10Q10 10 10 0Z';
 ---
 
 <!doctype html>
@@ -83,7 +84,8 @@ const iconeWhats =
   <body>
     <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-    <header class="menu">
+    <!-- Menu flutuante -->
+    <header class="menu" data-menu-barra>
       <a class="menu-nome" href="#topo">{capa.nome}</a>
       <nav aria-label="Seções">
         <ul>
@@ -91,13 +93,18 @@ const iconeWhats =
           <li><a href="#destaques" data-menu>Trabalhos</a></li>
           <li><a href="#contato" data-menu>Contato</a></li>
         </ul>
+        <span class="menu-marcador" aria-hidden="true"></span>
       </nav>
+      <a class="menu-whats" href={whatsapp} target="_blank" rel="noopener" aria-label={capa.botao}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d={iconeWhats}></path></svg>
+      </a>
+      <span class="menu-progresso" aria-hidden="true"></span>
     </header>
 
     <main id="conteudo">
       <!-- Capa -->
       <section class="capa escuro" id="topo" aria-labelledby="nome">
-        <Ilustracao tipo="bananeira" class="il-capa" balanca />
+        <Ilustracao tipo="bananeira" class="il-capa" balanca paralaxe={0.12} />
         <div class="capa-texto">
           <h1 id="nome" class="capa-nome">
             <span>Esther</span>
@@ -108,8 +115,8 @@ const iconeWhats =
           <blockquote class="capa-frase">
             <p>{capa.frase}</p>
           </blockquote>
-          <a class="botao botao-caja" href={whatsapp} target="_blank" rel="noopener" data-whats-principal>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d={iconeWhats} /></svg>
+          <a class="botao botao-caja" href={whatsapp} target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d={iconeWhats}></path></svg>
             {capa.botao}
           </a>
           <ul class="capa-numeros">
@@ -125,9 +132,9 @@ const iconeWhats =
             }
           </ul>
         </div>
-        <div class="capa-retrato">
+        <div class="capa-retrato" data-mouse>
           <svg class="capa-astros" viewBox="0 0 400 480" aria-hidden="true" focusable="false">
-            <circle class="sol-disco" cx="300" cy="110" r="86" />
+            <circle class="sol-disco" cx="300" cy="110" r="86"></circle>
             <g class="sol-raios">
               {
                 Array.from({ length: 24 }, (_, i) => {
@@ -143,10 +150,10 @@ const iconeWhats =
                 })
               }
             </g>
-            <path class="lua" d="M46 30a26 26 0 1 0 24 36 21 21 0 1 1-24-36Z" />
-            <circle class="ponto pisca" cx="84" cy="22" r="2.2" />
-            <circle class="ponto pisca" cx="24" cy="96" r="1.6" style="animation-delay:1.3s" />
-            <circle class="ponto pisca" cx="372" cy="300" r="1.8" style="animation-delay:2.1s" />
+            <path class="lua" d="M46 30a26 26 0 1 0 24 36 21 21 0 1 1-24-36Z"></path>
+            <circle class="ponto pisca" cx="84" cy="22" r="2.2"></circle>
+            <circle class="ponto pisca" cx="24" cy="96" r="1.6" style="animation-delay:1.3s"></circle>
+            <circle class="ponto pisca" cx="372" cy="300" r="1.8" style="animation-delay:2.1s"></circle>
           </svg>
           <div class="arco">
             <Foto
@@ -160,28 +167,29 @@ const iconeWhats =
         </div>
       </section>
 
+      <Faixa frases={metodo} />
+
       <!-- Onde atuei -->
       <section class="claro secao com-ilustra" id="onde" aria-labelledby="onde-titulo">
-        <Ilustracao tipo="ramo" class="il-onde" balanca />
+        <Ilustracao tipo="ramo" class="il-onde" balanca paralaxe={-0.1} />
         <div class="largura">
-          <h2 id="onde-titulo" class="titulo">{ondeAtuei.titulo}</h2>
+          <h2 id="onde-titulo" class="titulo" data-revela="palavras">{ondeAtuei.titulo}</h2>
           <ol class="experiencias">
             {
-              ondeAtuei.experiencias.map((e) => (
-                <li class="experiencia">
-                  <div class="experiencia-quem">
-                    <h3 class="experiencia-empresa">{e.empresa}</h3>
-                    {e.cargo && <p class="experiencia-cargo">{e.cargo}</p>}
-                    {e.sobre && <p class="experiencia-sobre">{e.sobre}</p>}
-                  </div>
-                  <div class="experiencia-oque">
-                    <p>{e.texto}</p>
-                    {e.resultado && (
-                      <p class="experiencia-resultado">
-                        <strong>Resultado:</strong> {e.resultado}
-                      </p>
-                    )}
-                  </div>
+              ondeAtuei.experiencias.map((e, i) => (
+                <li class="experiencia" data-revela style={`--i:${i % 2}`}>
+                  <h3 class="experiencia-empresa">{e.empresa}</h3>
+                  <p class="experiencia-cargo">{e.cargo}</p>
+                  {e.sobre && <p class="experiencia-sobre">{e.sobre}</p>}
+                  <Etiquetas itens={e.tarefas} rotulo="" />
+                  {e.resultado && (
+                    <p class="experiencia-resultado">
+                      <svg viewBox="0 0 20 20" aria-hidden="true">
+                        <path d={estrela} />
+                      </svg>
+                      {e.resultado}
+                    </p>
+                  )}
                 </li>
               ))
             }
@@ -191,13 +199,15 @@ const iconeWhats =
 
       <!-- Sobre -->
       <section class="claro secao secao-sobre com-ilustra" id="sobre" aria-labelledby="sobre-titulo">
-        <Ilustracao tipo="lua" class="il-sobre" />
+        <Ilustracao tipo="lua" class="il-sobre" paralaxe={0.08} />
         <div class="largura sobre">
           <div class="sobre-texto">
-            <h2 id="sobre-titulo" class="titulo">{sobre.titulo}</h2>
-            {sobre.paragrafos.map((p, i) => <p class:list={{ 'sobre-abre': i === 1 }}>{p}</p>)}
+            <h2 id="sobre-titulo" class="titulo" data-revela="palavras">{sobre.titulo}</h2>
+            <p class="sobre-destaque" data-revela="palavras">{sobre.destaque}</p>
+            {sobre.paragrafos.map((p) => <p data-revela>{p}</p>)}
+            <Etiquetas itens={sobre.habilidades} rotulo="No que eu trabalho" />
           </div>
-          <div class="sobre-lado">
+          <div class="sobre-lado" data-revela="escala">
             <h3>Formação</h3>
             <ul class="formacao">
               {
@@ -212,63 +222,67 @@ const iconeWhats =
               }
             </ul>
             <h3>Ferramentas</h3>
-            <p>{lista(sobre.ferramentas)}.</p>
-            <p>IA: {lista(sobre.ferramentasIA)}.</p>
+            <ul class="ferramentas">
+              {sobre.ferramentas.map((f) => <li>{f}</li>)}
+            </ul>
           </div>
         </div>
       </section>
 
       <!-- Como eu trabalho -->
-      <section class="escuro secao como" aria-labelledby="como-titulo">
+      <section class="escuro secao como ondula" aria-labelledby="como-titulo">
         <div class="largura como-grade">
           <div>
-            <h2 id="como-titulo" class="como-rotulo">{comoTrabalho.titulo}</h2>
-            <p class="como-frase">{comoTrabalho.frase}</p>
-            <p class="como-complemento">{comoTrabalho.complemento}</p>
-            <p class="como-prova">{comoTrabalho.prova}</p>
+            <h2 id="como-titulo" class="como-rotulo" data-revela>{comoTrabalho.titulo}</h2>
+            <p class="como-frase" data-revela="palavras">{comoTrabalho.frase}</p>
+            <p class="como-complemento" data-revela>{comoTrabalho.complemento}</p>
+            <p class="como-prova" data-revela>{comoTrabalho.prova}</p>
           </div>
           <CeuDoMes />
         </div>
       </section>
 
       <!-- Destaques -->
-      <section class="claro secao com-ilustra" id="destaques" aria-labelledby="destaques-titulo">
-        <Ilustracao tipo="bananeira" class="il-destaques" balanca />
+      <section class="claro secao com-ilustra ondula" id="destaques" aria-labelledby="destaques-titulo">
+        <Ilustracao tipo="bananeira" class="il-destaques" balanca paralaxe={-0.15} />
         <div class="largura">
-          <h2 id="destaques-titulo" class="titulo">{destaques.titulo}</h2>
-          
+          <h2 id="destaques-titulo" class="titulo" data-revela="palavras">{destaques.titulo}</h2>
+
           <!-- Revisão -->
           <article class="caso" id={revisao.id} aria-labelledby="revisao-nome">
-            <header class="caso-topo">
-              <h3 id="revisao-nome" class="caso-nome">{revisao.nome}</h3>
-              <p class="caso-contexto">{revisao.contexto}</p>
-              <MinhaParte texto={revisao.minhaParte} />
-            </header>
+            <CasoTopo
+              id="revisao"
+              nome={revisao.nome}
+              onde={revisao.onde}
+              gancho={revisao.gancho}
+              contexto={revisao.contexto}
+              fiz={revisao.fiz}
+            />
             <div class="revisao-grade">
               <div class="revisao-numeros">
-                <div class="seguidores">
+                <div class="seguidores" data-revela>
                   <p class="numero">
                     <strong data-conta={revisao.seguidores.antes}>{revisao.seguidores.antes}</strong>
                     <span>{revisao.seguidores.antesRotulo}</span>
                   </p>
                   <svg class="seguidores-linha" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true">
-                    <line x1="4" y1="10" x2="96" y2="10" vector-effect="non-scaling-stroke" />
+                    <line x1="4" y1="10" x2="96" y2="10" vector-effect="non-scaling-stroke"></line>
                   </svg>
                   <p class="numero">
                     <strong data-conta={revisao.seguidores.depois}>{revisao.seguidores.depois}</strong>
                     <span>{revisao.seguidores.depoisRotulo}</span>
                   </p>
                 </div>
-                <div class="campanha">
+                <div class="campanha" data-revela>
                   <p class="numero numero-grande">
                     <strong data-conta={revisao.campanha.numero}>{revisao.campanha.numero}</strong>
                     <span>{revisao.campanha.rotulo}</span>
                   </p>
                   <p class="campanha-explica">{revisao.campanha.explicacao}</p>
                 </div>
-                <p class="nota">{revisao.nota}</p>
+                <p class="nota" data-revela>{revisao.nota}</p>
               </div>
-              <figure class="print print-revisao">
+              <figure class="print print-revisao" data-revela="escala">
                 <a href={revisaoGrande ?? '#'} data-ampliar aria-label={`Ampliar: ${revisao.print.alt}`}>
                   <Foto
                     nome={revisao.print.imagem}
@@ -280,9 +294,9 @@ const iconeWhats =
                 <figcaption>{revisao.print.legenda}</figcaption>
               </figure>
             </div>
-            <Raciocinio paragrafos={revisao.raciocinio}>
-              {
-                revisao.copyLandingPage && (
+            {
+              revisao.copyLandingPage && (
+                <Raciocinio paragrafos={[]} rotulo="Ver a copy da landing page">
                   <div class="landing">
                     <h4>{revisao.copyLandingPage.titulo}</h4>
                     <p>{revisao.copyLandingPage.texto}</p>
@@ -292,58 +306,65 @@ const iconeWhats =
                       </a>
                     )}
                   </div>
-                )
-              }
-            </Raciocinio>
+                </Raciocinio>
+              )
+            }
           </article>
 
           <!-- Dra. Rita Leão -->
           <article class="caso" id={rita.id} aria-labelledby="rita-nome">
-            <header class="caso-topo">
-              <h3 id="rita-nome" class="caso-nome">{rita.nome}</h3>
-              <p class="caso-contexto">Pela {rita.agencia}.</p>
-              <MinhaParte texto={rita.minhaParte} />
-            </header>
+            <CasoTopo
+              id="rita"
+              nome={rita.nome}
+              onde={rita.onde}
+              gancho={rita.gancho}
+              contexto={rita.contexto}
+              fiz={rita.fiz}
+            />
 
-            <figure class="reels" data-anima>
-              <figcaption class="reels-resumo">{rita.resumo}</figcaption>
-              {
-                gruposReels.map((grupo) => (
-                  <div class:list={['reels-grupo', { 'reels-meus': grupo !== gruposReels[0] }]}>
-                    <p class="reels-grupo-nome">{grupo}</p>
-                    <ul>
-                      {rita.reels
-                        .filter((r) => r.grupo === grupo)
-                        .map((r) => (
-                          <li style={`--valor:${(r.visualizacoes / maiorReel).toFixed(4)}`}>
-                            <span class="reels-tema">{r.tema}</span>
-                            <span class="reels-barra" aria-hidden="true" />
-                            <span class="reels-valor">{numero(r.visualizacoes)} visualizações</span>
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
-                ))
-              }
-              <p class="reels-escala" aria-hidden="true">
-                <span>0</span>
-                <span>{numero(maiorReel)}</span>
-              </p>
-            </figure>
+            <div class="rita-prova">
+              <figure class="reels" data-anima data-revela>
+                <figcaption class="reels-titulo">Visualizações por Reel</figcaption>
+                {
+                  gruposReels.map((grupo) => (
+                    <div class:list={['reels-grupo', { 'reels-meus': grupo !== gruposReels[0] }]}>
+                      <p class="reels-grupo-nome">{grupo}</p>
+                      <ul>
+                        {rita.reels
+                          .filter((r) => r.grupo === grupo)
+                          .map((r) => (
+                            <li style={`--valor:${(r.visualizacoes / maiorReel).toFixed(4)}`}>
+                              <span class="reels-tema">{r.tema}</span>
+                              <span class="reels-barra" aria-hidden="true" />
+                              <span class="reels-valor">{numero(r.visualizacoes)}</span>
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+                  ))
+                }
+                <p class="reels-escala" aria-hidden="true">
+                  <span>0</span>
+                  <span>{numero(maiorReel)}</span>
+                </p>
+              </figure>
 
-            <ul class="prints-rita" aria-label="Prints dos insights dos quatro Reels">
-              {
-                printsRita.map((p) => (
-                  <li>
-                    <a href={p.grande ?? '#'} data-ampliar aria-label={`Ampliar: ${p.alt}`}>
-                      <Foto nome={p.imagem} alt={p.alt} widths={[200, 320]} sizes="(min-width: 960px) 180px, 44vw" />
-                    </a>
-                    <span>{p.rotulo}</span>
-                  </li>
-                ))
-              }
-            </ul>
-            <p class="prints-dica">Toque em um print para ampliar.</p>
+              <div class="prints-bloco">
+                <ul class="prints-rita" aria-label="Prints dos insights dos quatro Reels" data-revela="cascata">
+                  {
+                    printsRita.map((p, i) => (
+                      <li style={`--i:${i}`}>
+                        <a href={p.grande ?? '#'} data-ampliar aria-label={`Ampliar: ${p.alt}`}>
+                          <Foto nome={p.imagem} alt={p.alt} widths={[200, 320]} sizes="(min-width: 960px) 140px, 44vw" />
+                        </a>
+                        <span>{p.rotulo}</span>
+                      </li>
+                    ))
+                  }
+                </ul>
+                <p class="prints-dica">Toque em um print para ampliar.</p>
+              </div>
+            </div>
 
             <Carrossel carrossel={rita.carrossel} dono={rita.nome} />
             <Raciocinio paragrafos={rita.raciocinio} />
@@ -352,47 +373,49 @@ const iconeWhats =
       </section>
 
       <!-- Dra. Gabriela Horn -->
-      <section class="escuro secao caso-escuro com-ilustra" aria-labelledby="horn-nome">
-        <Ilustracao tipo="ramo" class="il-horn" balanca />
+      <section class="escuro secao caso-escuro com-ilustra ondula" aria-labelledby="horn-nome">
+        <Ilustracao tipo="ramo" class="il-horn" balanca paralaxe={-0.1} />
         <div class="largura">
           <article class="caso" id={horn.id}>
-            <header class="caso-topo">
-              <h3 id="horn-nome" class="caso-nome">{horn.nome}</h3>
-              <p class="caso-contexto">Pela {horn.agencia}.</p>
-              <MinhaParte texto={horn.minhaParte} />
-            </header>
-            <div class="horn-prova">
-              <p class="horn-resumo">{horn.resumo}</p>
-              <p class="horn-logica">{horn.logica}</p>
-            </div>
+            <CasoTopo
+              id="horn"
+              nome={horn.nome}
+              onde={horn.onde}
+              gancho={horn.gancho}
+              contexto={horn.contexto}
+              fiz={horn.fiz}
+            />
             <Carrossel carrossel={horn.carrossel} dono={horn.nome} />
             <Raciocinio paragrafos={horn.raciocinio} />
           </article>
         </div>
       </section>
 
+      <Faixa frases={metodo} reverso />
+
       <!-- Outros projetos -->
       <section class="claro secao com-ilustra" id="outros" aria-labelledby="outros-titulo">
-        <Ilustracao tipo="flor" class="il-outros" />
+        <Ilustracao tipo="flor" class="il-outros" paralaxe={0.1} />
         <div class="largura">
-          <h2 id="outros-titulo" class="titulo">{outrosProjetos.titulo}</h2>
-          <p class="titulo-apoio">{outrosProjetos.intro}</p>
+          <h2 id="outros-titulo" class="titulo" data-revela="palavras">{outrosProjetos.titulo}</h2>
+          <p class="titulo-apoio" data-revela>{outrosProjetos.intro}</p>
           <div class="outros">
             {
-              projetos.map((p) => (
-                <article class="cartao">
+              projetos.map((p, i) => (
+                <article class="cartao" data-revela style={`--i:${i}`}>
                   <div class="cartao-imagens">
                     <a class="print" href={p.feedGrande ?? '#'} data-ampliar aria-label={`Ampliar: ${p.feed.alt}`}>
-                      <Foto nome={p.feed.imagem} alt={p.feed.alt} widths={[240, 360, 480]} sizes="(min-width: 960px) 190px, 34vw" />
+                      <Foto nome={p.feed.imagem} alt={p.feed.alt} widths={[240, 360, 480]} sizes="(min-width: 960px) 180px, 32vw" />
                     </a>
                     <a class="print" href={p.detalheGrande ?? '#'} data-ampliar aria-label={`Ampliar: ${p.detalhe.alt}`}>
-                      <Foto nome={p.detalhe.imagem} alt={p.detalhe.alt} widths={[320, 480, 640]} sizes="(min-width: 960px) 330px, 58vw" />
+                      <Foto nome={p.detalhe.imagem} alt={p.detalhe.alt} widths={[320, 480, 640]} sizes="(min-width: 960px) 320px, 56vw" />
                     </a>
                   </div>
-                  <h3 class="cartao-nome">{p.nome}</h3>
                   <p class="cartao-tipo">{p.tipo}</p>
+                  <h3 class="cartao-nome">{p.nome}</h3>
+                  <p class="cartao-desafio">{p.desafio}</p>
                   <p>{p.texto}</p>
-                  <MinhaParte texto={p.minhaParte} />
+                  <Etiquetas itens={p.fiz} />
                 </article>
               ))
             }
@@ -401,32 +424,34 @@ const iconeWhats =
       </section>
 
       <!-- Contato -->
-      <section class="escuro secao contato com-ilustra" id="contato" aria-labelledby="contato-titulo">
-        <Ilustracao tipo="sol" class="il-contato" />
+      <section class="escuro secao contato com-ilustra ondula" id="contato" aria-labelledby="contato-titulo">
+        <Ilustracao tipo="sol" class="il-contato" paralaxe={0.1} />
         <div class="largura contato-grade">
           <div>
-            <h2 id="contato-titulo" class="contato-titulo">{rodape.titulo}</h2>
-            <p class="contato-texto">{rodape.texto}</p>
+            <h2 id="contato-titulo" class="contato-titulo" data-revela="palavras">{rodape.titulo}</h2>
+            <p class="contato-texto" data-revela>{rodape.texto}</p>
           </div>
-          <div class="contato-acoes">
-            <a class="botao botao-caja" href={whatsapp} target="_blank" rel="noopener" data-whats-principal>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d={iconeWhats} /></svg>
+          <div class="contato-acoes" data-revela="cascata">
+            <a class="botao botao-caja" href={whatsapp} target="_blank" rel="noopener" style="--i:0">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d={iconeWhats}></path></svg>
               {contato.botaoWhatsapp}
             </a>
-            <div class="contato-email">
+            <div class="contato-email" style="--i:1">
               <a class="botao botao-contorno" href={`mailto:${contato.email}`}>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3z M3 7l9 6 9-6" /></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3z M3 7l9 6 9-6"></path></svg>
                 {contato.botaoEmail}
               </a>
               <button type="button" class="copiar" data-copiar={contato.email}>
                 <span data-copiar-texto>{contato.botaoCopiar}</span>
               </button>
             </div>
-            <a class="botao botao-contorno" href={contato.linkedin} target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h3.5v11H4z M5.75 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4z M10 9h3.4v1.6c.5-.9 1.7-1.9 3.6-1.9 3.6 0 4 2.3 4 5.3V20h-3.5v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V20H10z" /></svg>
+            <a class="botao botao-contorno botao-linkedin" href={contato.linkedin} target="_blank" rel="noopener" style="--i:2">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 9h3.5v11H4z M5.75 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4z M10 9h3.4v1.6c.5-.9 1.7-1.9 3.6-1.9 3.6 0 4 2.3 4 5.3V20h-3.5v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V20H10z"></path>
+              </svg>
               {contato.botaoLinkedin}
             </a>
-            <p class="contato-formato">{contato.formato}</p>
+            <p class="contato-formato" style="--i:3">{contato.formato}</p>
           </div>
         </div>
       </section>
@@ -437,128 +462,16 @@ const iconeWhats =
       <p>{capa.nome}, {capa.funcao.toLowerCase()}.</p>
     </footer>
 
-    <a class="whats-fixo" href={whatsapp} target="_blank" rel="noopener" data-whats-fixo>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d={iconeWhats} /></svg>
-      {capa.botao}
-    </a>
-
     <dialog class="lupa" data-lupa aria-label="Imagem ampliada">
       <button type="button" class="lupa-fechar" data-lupa-fechar aria-label="Fechar imagem ampliada">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
       </button>
       <img data-lupa-img alt="" />
     </dialog>
 
     <script>
-      const reduzido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      // Ilustrações, barras e números ganham vida quando entram na tela.
-      const animados = document.querySelectorAll<HTMLElement>('[data-anima]');
-      const contar = (el: HTMLElement) => {
-        const final = el.dataset.conta ?? '';
-        const m = final.match(/^([\d.]+)(.*)$/);
-        if (!m || reduzido) return;
-        const alvo = Number(m[1].replace(/\./g, ''));
-        const resto = m[2];
-        const inicio = performance.now();
-        const passo = (agora: number) => {
-          const t = Math.min(1, (agora - inicio) / 1400);
-          const v = Math.round(alvo * (1 - Math.pow(1 - t, 3)));
-          el.textContent = v.toLocaleString('pt-BR') + resto;
-          if (t < 1) requestAnimationFrame(passo);
-          else el.textContent = final;
-        };
-        requestAnimationFrame(passo);
-      };
-      if ('IntersectionObserver' in window && !reduzido) {
-        document.documentElement.classList.add('anima');
-        const obs = new IntersectionObserver(
-          (entradas) =>
-            entradas.forEach((e) => {
-              if (!e.isIntersecting) return;
-              e.target.classList.add('visivel');
-              obs.unobserve(e.target);
-            }),
-          { threshold: 0.15 },
-        );
-        animados.forEach((el) => obs.observe(el));
-        const obsNum = new IntersectionObserver(
-          (entradas) =>
-            entradas.forEach((e) => {
-              if (!e.isIntersecting) return;
-              contar(e.target as HTMLElement);
-              obsNum.unobserve(e.target);
-            }),
-          { threshold: 0.6 },
-        );
-        document.querySelectorAll<HTMLElement>('[data-conta]').forEach((el) => obsNum.observe(el));
-      }
-
-      // Menu: marca a seção em que a pessoa está.
-      const links = document.querySelectorAll<HTMLAnchorElement>('[data-menu]');
-      if ('IntersectionObserver' in window) {
-        const obsMenu = new IntersectionObserver(
-          (entradas) =>
-            entradas.forEach((e) => {
-              if (!e.isIntersecting) return;
-              links.forEach((l) =>
-                l.getAttribute('href') === '#' + e.target.id
-                  ? l.setAttribute('aria-current', 'true')
-                  : l.removeAttribute('aria-current'),
-              );
-            }),
-          { rootMargin: '-45% 0px -50% 0px' },
-        );
-        links.forEach((l) => {
-          const alvo = document.querySelector(l.getAttribute('href')!);
-          if (alvo) obsMenu.observe(alvo);
-        });
-      }
-
-      // Ampliar prints numa janela, sem sair da página.
-      const lupa = document.querySelector<HTMLDialogElement>('[data-lupa]');
-      const lupaImg = document.querySelector<HTMLImageElement>('[data-lupa-img]');
-      if (lupa && lupaImg && typeof lupa.showModal === 'function') {
-        document.querySelectorAll<HTMLAnchorElement>('[data-ampliar]').forEach((a) =>
-          a.addEventListener('click', (ev) => {
-            ev.preventDefault();
-            lupaImg.src = a.href;
-            lupaImg.alt = a.querySelector('img')?.alt ?? '';
-            lupa.showModal();
-          }),
-        );
-        document.querySelector('[data-lupa-fechar]')?.addEventListener('click', () => lupa.close());
-        lupa.addEventListener('click', (ev) => {
-          if (ev.target === lupa) lupa.close();
-        });
-      }
-
-      // Copiar e-mail.
-      document.querySelectorAll<HTMLButtonElement>('[data-copiar]').forEach((b) =>
-        b.addEventListener('click', async () => {
-          const texto = b.querySelector<HTMLElement>('[data-copiar-texto]')!;
-          const original = texto.textContent;
-          try {
-            await navigator.clipboard.writeText(b.dataset.copiar!);
-            texto.textContent = 'E-mail copiado';
-          } catch {
-            texto.textContent = b.dataset.copiar!;
-          }
-          setTimeout(() => (texto.textContent = original), 2500);
-        }),
-      );
-
-      // O botão fixo some quando outro botão de WhatsApp já está na tela.
-      const fixo = document.querySelector<HTMLElement>('[data-whats-fixo]');
-      const principais = document.querySelectorAll('[data-whats-principal]');
-      if (fixo && 'IntersectionObserver' in window) {
-        const visiveis = new Set<Element>();
-        const obs = new IntersectionObserver((entradas) => {
-          entradas.forEach((e) => (e.isIntersecting ? visiveis.add(e.target) : visiveis.delete(e.target)));
-          fixo.classList.toggle('escondido', visiveis.size > 0);
-        });
-        principais.forEach((p) => obs.observe(p));
-      }
+      import { iniciar } from '../lib/movimento';
+      iniciar();
     </script>
   </body>
 </html>

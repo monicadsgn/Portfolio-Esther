@@ -1,0 +1,29 @@
+---
+// Faixa em movimento entre seções, com o método da Esther.
+interface Props {
+  frases: string[];
+  reverso?: boolean;
+  tom?: 'claro' | 'escuro';
+}
+const { frases, reverso = false, tom = 'escuro' } = Astro.props;
+const linha = [...frases, ...frases];
+---
+
+<div class:list={['faixa', `faixa-${tom}`, { 'faixa-reverso': reverso }]} aria-hidden="true">
+  <div class="faixa-trilho">
+    {
+      [0, 1].map(() => (
+        <p>
+          {linha.map((f) => (
+            <span>
+              {f}
+              <svg viewBox="0 0 20 20">
+                <path d="M10 0Q10 10 20 10Q10 10 10 20Q10 10 0 10Q10 10 10 0Z" />
+              </svg>
+            </span>
+          ))}
+        </p>
+      ))
+    }
+  </div>
+</div>

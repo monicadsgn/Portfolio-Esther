@@ -1,0 +1,15 @@
+---
+// Etiquetas curtas do que a Esther fez. Entram uma a uma quando aparecem na tela.
+interface Props {
+  itens: string[];
+  rotulo?: string;
+}
+const { itens, rotulo = 'O que eu fiz' } = Astro.props;
+---
+
+<div class="etiquetas">
+  {rotulo && <p class="etiquetas-rotulo">{rotulo}</p>}
+  <ul data-revela="cascata">
+    {itens.map((t, i) => <li style={`--i:${i}`}>{t}</li>)}
+  </ul>
+</div>
