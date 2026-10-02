@@ -1,0 +1,19 @@
+---
+// Ícones em traço fino, no mesmo desenho das ilustrações.
+interface Props {
+  nome: 'calendario' | 'pena' | 'video' | 'lupa' | 'tela' | 'grafico';
+}
+const { nome } = Astro.props;
+const desenhos: Record<Props['nome'], string> = {
+  calendario: 'M5 7h22v20H5z M5 12h22 M11 4v5 M21 4v5 M10 17h3 M15 17h3 M20 17h3 M10 22h3 M15 22h3',
+  pena: 'M25 5c-9 2-15 8-17 19l-2 4 M8 24c6-1 11-5 13-11 M14 18l-4-1',
+  video: 'M4 8h17v16H4z M21 13l7-4v14l-7-4 M10 12.5v7l6-3.5z',
+  lupa: 'M14 6a8 8 0 1 0 0 16a8 8 0 1 0 0-16z M20 20l7 7 M10 14h8',
+  tela: 'M4 6h24v16H4z M12 27h8 M16 22v5 M8 11h10 M8 15h14',
+  grafico: 'M5 27h22 M8 22v-6 M14 22v-10 M20 22v-4 M26 22v-13 M7 12l7-5 6 4 6-6',
+};
+---
+
+<svg class="icone" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+  <path d={desenhos[nome]}></path>
+</svg>

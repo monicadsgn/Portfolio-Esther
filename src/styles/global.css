@@ -142,8 +142,7 @@ body::after {
   inset: 0;
   z-index: 60;
   background-image: var(--granulado);
-  mix-blend-mode: soft-light;
-  opacity: 0.35;
+  opacity: 0.07;
   pointer-events: none;
 }
 
@@ -1541,6 +1540,171 @@ body::after {
     opacity: 0;
     transform: translateY(-6px);
   }
+}
+
+/* ---------- Roteiro aberto ---------- */
+.roteiro {
+  margin-top: 1rem;
+  padding: clamp(1.4rem, 4vw, 2.5rem);
+  border: 1px solid rgba(185, 211, 195, 0.25);
+  border-radius: 6px 32px 6px 32px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.roteiro-rotulo {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--caja);
+}
+
+.roteiro-titulo {
+  margin-top: 0.35rem;
+  font-family: var(--titulo);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3.4vw, 2rem);
+  line-height: 1.15;
+}
+
+.roteiro-descricao {
+  margin-top: 0.4rem;
+  color: var(--apoio-escuro);
+}
+
+.roteiro-partes {
+  position: relative;
+  margin-top: 2rem;
+}
+
+/* Linha que liga as partes do roteiro */
+.roteiro-partes::before {
+  content: '';
+  position: absolute;
+  top: 0.6rem;
+  bottom: 0.6rem;
+  left: 0.3rem;
+  width: 1px;
+  background: rgba(246, 195, 95, 0.45);
+}
+
+.roteiro-parte {
+  position: relative;
+  display: grid;
+  gap: 0.35rem 2rem;
+  padding-left: 2rem;
+}
+
+.roteiro-parte + .roteiro-parte {
+  margin-top: 1.6rem;
+}
+
+.roteiro-parte::before {
+  content: '';
+  position: absolute;
+  top: 0.45rem;
+  left: 0;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: var(--caja);
+  box-shadow: 0 0 0 4px var(--mata);
+}
+
+.roteiro-parte-nome {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--caja);
+}
+
+.roteiro-parte-texto {
+  max-width: 44rem;
+}
+
+.roteiro-parte-texto p + p {
+  margin-top: 0.6rem;
+}
+
+.roteiro-parte-0 .roteiro-parte-texto,
+.roteiro-parte:last-child .roteiro-parte-texto {
+  font-family: var(--titulo);
+  font-size: clamp(1.2rem, 2.6vw, 1.5rem);
+  line-height: 1.35;
+}
+
+@media (min-width: 900px) {
+  .roteiro-parte {
+    grid-template-columns: 9rem 1fr;
+  }
+}
+
+/* ---------- O que eu entrego ---------- */
+.secao-entregas {
+  padding-top: 0;
+}
+
+.entregas {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 600px) {
+  .entregas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .entregas {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.entrega {
+  padding: 1.6rem;
+  border-radius: 24px 24px 24px 6px;
+  background: var(--capim-2);
+  transition: transform 0.4s var(--suave), box-shadow 0.4s;
+}
+
+.entrega:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 30px -22px rgba(31, 58, 47, 0.6);
+}
+
+.entrega .icone {
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.55rem;
+  border-radius: 50%;
+  background: var(--mata);
+  fill: none;
+  stroke: var(--caja);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.5s var(--suave);
+}
+
+.entrega:hover .icone {
+  transform: rotate(-10deg) scale(1.08);
+}
+
+.entrega h3 {
+  margin-top: 1rem;
+  font-family: var(--titulo);
+  font-weight: 400;
+  font-size: 1.45rem;
+  line-height: 1.15;
+  color: var(--bananeira);
+}
+
+.entrega p {
+  margin-top: 0.4rem;
+  color: var(--apoio-claro);
+}
+
+.nichos {
+  margin-top: 2.5rem;
 }
 
 /* ---------- Outros projetos ---------- */

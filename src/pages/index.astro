@@ -12,6 +12,8 @@ import Ilustracao from '../components/Ilustracao.astro';
 import CasoTopo from '../components/CasoTopo.astro';
 import Etiquetas from '../components/Etiquetas.astro';
 import Faixa from '../components/Faixa.astro';
+import Roteiro from '../components/Roteiro.astro';
+import Icone from '../components/Icone.astro';
 import { imagem } from '../lib/assets';
 import {
   site,
@@ -26,6 +28,7 @@ import {
   rita,
   horn,
   outrosProjetos,
+  entregas,
   rodape,
 } from '../data/conteudo';
 
@@ -387,6 +390,7 @@ const estrela = 'M10 0Q10 10 20 10Q10 10 10 20Q10 10 0 10Q10 10 10 0Z';
               contexto={horn.contexto}
               fiz={horn.fiz}
             />
+            <Roteiro roteiro={horn.roteiro} />
             <Carrossel carrossel={horn.carrossel} dono={horn.nome} />
             <Raciocinio paragrafos={horn.raciocinio} />
           </article>
@@ -421,6 +425,28 @@ const estrela = 'M10 0Q10 10 20 10Q10 10 10 20Q10 10 0 10Q10 10 10 0Z';
                 </article>
               ))
             }
+          </div>
+        </div>
+      </section>
+
+      <!-- O que eu entrego -->
+      <section class="claro secao secao-entregas" id="entregas" aria-labelledby="entregas-titulo">
+        <div class="largura">
+          <h2 id="entregas-titulo" class="titulo" data-revela="palavras">{entregas.titulo}</h2>
+          <p class="titulo-apoio" data-revela>{entregas.intro}</p>
+          <ul class="entregas">
+            {
+              entregas.itens.map((item, i) => (
+                <li class="entrega" data-revela style={`--i:${i % 3}`}>
+                  <Icone nome={item.icone as any} />
+                  <h3>{item.nome}</h3>
+                  <p>{item.texto}</p>
+                </li>
+              ))
+            }
+          </ul>
+          <div class="nichos" data-revela>
+            <Etiquetas itens={entregas.nichos} rotulo={entregas.nichosTitulo} />
           </div>
         </div>
       </section>

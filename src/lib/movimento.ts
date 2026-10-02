@@ -186,9 +186,15 @@ export function iniciar() {
   lupa();
   copiar();
   if (reduzido || !temObserver) return;
-  document.documentElement.classList.add('anima');
-  separarPalavras();
-  revelar();
-  contar();
-  paralaxe();
+  // A preparação das animações espera o navegador ficar livre, para não
+  // atrasar a primeira pintura da página.
+  const preparar = () => {
+    document.documentElement.classList.add('anima');
+    separarPalavras();
+    revelar();
+    contar();
+    paralaxe();
+  };
+  if ('requestIdleCallback' in window) window.requestIdleCallback(preparar, { timeout: 1200 });
+  else window.setTimeout(preparar, 200);
 }

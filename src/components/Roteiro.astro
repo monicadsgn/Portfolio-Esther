@@ -1,0 +1,33 @@
+---
+// Roteiro aberto, marcado por partes, como a Esther entrega.
+interface Props {
+  roteiro: {
+    titulo: string;
+    descricao: string;
+    partes: { nome: string; texto: string[] }[];
+  };
+}
+const { roteiro } = Astro.props;
+---
+
+<div class="roteiro">
+  <div class="roteiro-topo" data-revela>
+    <p class="roteiro-rotulo">Roteiro de vídeo</p>
+    <h4 class="roteiro-titulo">{roteiro.titulo}</h4>
+    <p class="roteiro-descricao">{roteiro.descricao}</p>
+  </div>
+  <ol class="roteiro-partes">
+    {
+      roteiro.partes.map((parte, i) => (
+        <li class:list={['roteiro-parte', `roteiro-parte-${i}`]} data-revela style={`--i:${i % 2}`}>
+          <p class="roteiro-parte-nome">{parte.nome}</p>
+          <div class="roteiro-parte-texto">
+            {parte.texto.map((t) => (
+              <p>{t}</p>
+            ))}
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</div>

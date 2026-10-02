@@ -247,6 +247,41 @@ export const horn = {
   gancho: 'O roteiro parte da dor da paciente e coloca o diagnóstico antes do procedimento.',
   contexto: 'Roteiros dos vídeos de lançamento do Exomine (exossomos autólogos) e do LhaLa Peel.',
   fiz: ['Planejamento do mês', 'Roteiro dos vídeos'],
+  /** Roteiro aberto, com o texto exato da Esther. */
+  roteiro: {
+    titulo: 'Lançamento do Exomine',
+    descricao: 'Escrito na voz da médica, do gancho à chamada final.',
+    partes: [
+      {
+        nome: 'Gancho',
+        texto: [
+          'Você sente que o seu cabelo está mais fino, com menos volume, e que os tratamentos que já tentou não estão trazendo a resposta que esperava?',
+        ],
+      },
+      {
+        nome: 'Desenvolvimento',
+        texto: [
+          'Quando isso acontece, o próximo passo não deveria ser simplesmente testar mais um produto ou repetir o tratamento que funcionou para outra pessoa.',
+          'Na consulta, eu preciso entender o diagnóstico, o histórico daquele cabelo e o que já foi feito até aqui.',
+          'E, quando existe indicação para uma estratégia regenerativa, hoje temos recursos que ampliam essas possibilidades.',
+          'Um deles é o Exomine, uma tecnologia com exossomos autólogos, obtidos do próprio paciente, que pode ser incorporada aos meus protocolos capilares.',
+          'Mas ele não entra simplesmente por ser uma tecnologia nova. Ele entra quando faz sentido dentro da estratégia daquele paciente.',
+        ],
+      },
+      {
+        nome: 'Fechamento',
+        texto: [
+          'Porque, quando falamos de cabelo, tão importante quanto ter acesso a novos recursos é saber quando e para quem utilizá-los.',
+        ],
+      },
+      {
+        nome: 'Chamada',
+        texto: [
+          'Se você percebe queda, afinamento ou perda de densidade, agende sua consulta e vamos entender qual estratégia faz sentido para o seu cabelo.',
+        ],
+      },
+    ],
+  },
   carrossel: {
     titulo: 'Por que tanta gente fala de exossomos vegetais',
     descricao: 'Uma tecnologia nova, apresentada sem prometer resultado.',
@@ -318,6 +353,45 @@ export const outrosProjetos = {
       },
     },
   ],
+};
+
+export const entregas = {
+  titulo: 'O que eu entrego',
+  intro: 'Do planejamento ao texto final, com os números acompanhando.',
+  itens: [
+    {
+      icone: 'calendario',
+      nome: 'Planejamento mensal',
+      texto: 'Calendário com tema, texto e roteiro prontos antes do mês começar.',
+    },
+    {
+      icone: 'pena',
+      nome: 'Copy para redes',
+      texto: 'Legendas, carrosséis e textos de campanha na voz de cada marca.',
+    },
+    {
+      icone: 'video',
+      nome: 'Roteiros de vídeo',
+      texto: 'Reels e vídeos de lançamento, do gancho à chamada final.',
+    },
+    {
+      icone: 'lupa',
+      nome: 'Conteúdo com SEO',
+      texto: 'Textos e ações de comunicação pensados para serem encontrados.',
+    },
+    {
+      icone: 'tela',
+      nome: 'UX writing',
+      texto: 'Textos de landing pages e interfaces, claros e diretos.',
+    },
+    {
+      icone: 'grafico',
+      nome: 'Leitura de resultados',
+      texto: 'Acompanho os números pra ajustar a comunicação e decidir o próximo passo.',
+    },
+  ],
+  nichosTitulo: 'Nichos que já atendi',
+  nichos: ['Saúde e dermatologia', 'Educação jurídica', 'Varejo', 'Noivas e moda festa'],
 };
 
 export const rodape = {
