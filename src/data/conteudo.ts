@@ -413,4 +413,10 @@ export const rodape = {
   titulo: 'Vamos planejar o seu próximo mês?',
   texto:
     'Estou aberta a vagas e projetos de social media e copywriting em agências e empresas, em trabalho remoto. O caminho mais rápido é o WhatsApp.',
+  /** Crédito discreto no fim da página. */
+  credito: {
+    texto: 'Portfólio criado por',
+    nome: 'Mônica Design',
+    link: 'https://monicadesign.com.br',
+  },
 };

@@ -1939,6 +1939,25 @@ body::after {
   text-align: center;
 }
 
+.rodape-credito {
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--salvia);
+}
+
+.rodape-credito a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(185, 211, 195, 0.45);
+  text-underline-offset: 3px;
+  transition: color 0.2s, text-decoration-color 0.2s;
+}
+
+.rodape-credito a:hover {
+  color: var(--texto-claro);
+  text-decoration-color: currentColor;
+}
+
 /* ---------- Ilustrações em traço ---------- */
 .ilustra {
   position: absolute;
